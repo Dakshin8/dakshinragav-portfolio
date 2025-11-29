@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dakshin Ragav | Senior Product Designer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Inter for UI, Syne (or similar Display font) for the Name could be cool, 
+         but sticking to Inter Tight for that Google-clean look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="page-frame">
+        
+        <!-- TOP NAVIGATION -->
+        <nav class="nav-grid">
+            <div class="nav-item">
+                <span class="label">Candidate</span>
+                <span class="value">Dakshin Ragav</span>
+            </div>
+            <div class="nav-item mobile-hide">
+                <span class="label">Discipline</span>
+                <span class="value">Product Design & Research</span>
+            </div>
+            <div class="nav-item align-right">
+                <span class="label">Location / Time</span>
+                <span class="value" id="clock">IN &mdash; 00:00:00</span>
+            </div>
+        </nav>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="content-grid">
+            
+            <!-- THE NAME (Responsive & Massive) -->
+            <section class="hero-section">
+                <div class="status-pill fade-in">
+                    <span class="indicator"></span>
+                    System Upgrade In Progress
+                </div>
+                
+                <h1 class="hero-name">
+                    <span class="word slide-up">Dakshin</span>
+                    <span class="word slide-up delay-1">Ragav<span class="dot">.</span></span>
+                </h1>
+            </section>
+
+            <!-- CONTEXT & ACTIONS -->
+            <section class="info-section fade-in delay-2">
+                <div class="bio-block">
+                    <p class="manifesto">
+                        Senior UX Designer crafting <span class="highlight">clarity from chaos</span>. 
+                        Currently architecting a new portfolio experience to showcase large-scale design systems.
+                    </p>
+                </div>
+
+                <div class="action-block">
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/dakshinragav/" target="_blank" class="magnetic-btn outline">
+                        <span>LinkedIn</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+                    </a>
+                    
+                    <!-- Email Copy -->
+                    <button class="magnetic-btn solid" id="copyBtn" onclick="copyEmail()">
+                        <span id="btnText">Copy Email Address</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- INFINITE MARQUEE FOOTER -->
+        <footer class="ticker-wrap fade-in delay-3">
+            <div class="ticker">
+                <div class="ticker-item">UX Research &bull; Interaction Design &bull; Design Systems &bull; Prototyping &bull; User Strategy &bull; Visual Design &bull;</div>
+                <div class="ticker-item">UX Research &bull; Interaction Design &bull; Design Systems &bull; Prototyping &bull; User Strategy &bull; Visual Design &bull;</div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

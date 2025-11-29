@@ -1,0 +1,242 @@
+:root {
+    --bg: #FFFFFF;
+    --text: #0F0F0F;
+    --text-dim: #787878;
+    --accent: #2563EB;
+    --border: #E0E0E0;
+    --ticker-bg: #F5F5F5;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    height: 100vh; /* Full viewport height */
+    height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    overflow: hidden; /* No scrolling */
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- FRAMEWORK --- */
+.page-frame {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 24px;
+}
+
+/* --- NAV BAR --- */
+.nav-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.85rem;
+}
+
+.nav-item.align-right { text-align: right; align-items: flex-end; }
+
+.label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    font-weight: 500;
+}
+
+.value { font-weight: 600; font-feature-settings: "tnum" on, "lnum" on; }
+
+/* --- MAIN CONTENT GRID --- */
+.content-grid {
+    flex-grow: 1;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    align-items: center;
+    padding: 40px 0;
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 50px;
+    width: fit-content;
+    margin-bottom: 32px;
+}
+
+.indicator {
+    width: 6px; height: 6px;
+    background: #10B981;
+    border-radius: 50%;
+    animation: blink 2s infinite;
+}
+
+/* FLUID TYPOGRAPHY: This is the magic. 
+   It scales between 3.5rem (mobile) and 12rem (desktop) automatically. */
+.hero-name {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: clamp(3.5rem, 14vw, 12rem);
+    line-height: 0.9;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--text);
+}
+
+.hero-name .word { display: block; } /* Stack words */
+.dot { color: var(--accent); }
+
+/* --- INFO SECTION --- */
+.info-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    border-top: 1px solid var(--border);
+    padding-top: 40px;
+    align-items: flex-start;
+}
+
+.manifesto {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    line-height: 1.5;
+    color: var(--text);
+    max-width: 600px;
+    font-weight: 400;
+}
+
+.highlight { color: var(--text-dim); }
+
+/* --- ACTIONS --- */
+.action-block {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+}
+
+.magnetic-btn {
+    height: 56px;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+.outline:hover { background: #FAFAFA; border-color: #000; }
+
+.solid {
+    background: var(--text);
+    color: white;
+    border: 1px solid var(--text);
+}
+.solid:hover { background: #333; transform: translateY(-2px); }
+
+/* --- INFINITE TICKER FOOTER --- */
+.ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--ticker-bg);
+    padding: 12px 0;
+    white-space: nowrap;
+    position: relative;
+    border-radius: 4px;
+}
+
+.ticker {
+    display: inline-block;
+    animation: marquee 30s linear infinite;
+}
+
+.ticker-item {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-right: 40px; /* Gap between repeats */
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* --- ANIMATIONS --- */
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+.fade-in { opacity: 0; animation: fade 1s forwards; }
+.slide-up { opacity: 0; transform: translateY(40px); animation: slide 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+
+@keyframes fade { to { opacity: 1; } }
+@keyframes slide { to { opacity: 1; transform: translateY(0); } }
+
+/* --- RESPONSIVE LOGIC (Irrespective of Display) --- */
+
+/* Tablets & Small Laptops */
+@media (max-width: 1024px) {
+    .nav-grid { grid-template-columns: 1fr 1fr; }
+    .mobile-hide { display: none; }
+    .info-section { grid-template-columns: 1fr; gap: 24px; }
+    .action-block { justify-content: flex-start; }
+}
+
+/* Mobile Phones */
+@media (max-width: 768px) {
+    .page-frame { padding: 16px; }
+    
+    .nav-grid { padding-bottom: 16px; }
+    
+    /* Name takes up more vertical space */
+    .hero-name { 
+        font-size: 15vw; 
+        margin-bottom: 24px; 
+    }
+    
+    .status-pill { margin-bottom: 16px; }
+    
+    /* Buttons Stack */
+    .action-block { flex-direction: column; width: 100%; }
+    .magnetic-btn { width: 100%; justify-content: center; }
+    
+    /* Content stacks */
+    .content-grid { display: flex; flex-direction: column; justify-content: space-around; }
+}
+
+/* 4K / Ultra-wide Screens */
+@media (min-width: 1920px) {
+    .page-frame { max-width: 2000px; margin: 0 auto; }
+    .hero-name { font-size: 14rem; } /* Cap the size so it doesn't get absurd */
+}
