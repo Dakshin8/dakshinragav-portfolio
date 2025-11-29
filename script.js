@@ -1,5 +1,5 @@
 function copyEmail() {
-    const email = "hello@dakshinragav.com";
+    const email = "dakshinragav849@gmail.com";
     const btn = document.getElementById('emailBtn');
     const label = document.getElementById('btnLabel');
     const bg = document.querySelector('.success-bg');
