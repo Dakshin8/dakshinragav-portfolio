@@ -1,40 +1,34 @@
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. LIVE CLOCK (Updates every second)
-    const clock = document.getElementById('clock');
-    
-    function updateClock() {
-        const now = new Date();
-        const timeString = now.toLocaleTimeString('en-US', {
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: false,
-            timeZone: 'Asia/Kolkata' // Set to India
-        });
-        clock.innerHTML = `IN &mdash; ${timeString}`;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
+function copyEmail() {
+    const email = "dakshinragav849@gmail.com";
+    const btn = document.getElementById('emailBtn');
+    const label = document.getElementById('btnLabel');
+    const bg = document.querySelector('.success-bg');
+    const icon = document.getElementById('btnIcon');
+    const originalLabel = "Copy Email";
 
-    // 2. COPY EMAIL LOGIC
-    window.copyEmail = function() { // Attach to window for global access
-        const email = "dakshinragav849@gmail.com";
-        const btn = document.getElementById('copyBtn');
-        const textSpan = document.getElementById('btnText');
-        const originalText = "Copy Email Address";
+    navigator.clipboard.writeText(email).then(() => {
+        
+        // 1. Animate the Success Background (Sweep Effect)
+        bg.style.transform = "scaleX(1)";
+        
+        // 2. Change Text & Icon after a tiny delay for visual sync
+        setTimeout(() => {
+            label.innerText = "Address Copied";
+            // Checkmark Icon path
+            icon.innerHTML = '<polyline points="20 6 9 17 4 12"></polyline>';
+        }, 100);
 
-        navigator.clipboard.writeText(email).then(() => {
-            textSpan.innerText = "Copied!";
-            btn.style.backgroundColor = "#10B981"; // Green
-            btn.style.borderColor = "#10B981";
-            btn.style.color = "white";
-
+        // 3. Reset State after 2.5s
+        setTimeout(() => {
+            bg.style.transform = "scaleX(0)"; // Sweep back
             setTimeout(() => {
-                textSpan.innerText = originalText;
-                btn.style.backgroundColor = "#0F0F0F"; // Black
-                btn.style.borderColor = "#0F0F0F";
-            }, 2000);
-        });
-    }
-});
+                label.innerText = originalLabel;
+                // Copy Icon path (reset)
+                icon.innerHTML = '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>';
+            }, 200); // Wait for background to leave
+        }, 2500);
+
+    }).catch(err => {
+        console.error('Copy failed', err);
+    });
+}
