@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Analytics | Dakshin Ragav</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="scroll-progress"></div>
+
+    <nav class="nav-island fade-down">
+        <a href="index.html" class="logo">&larr; Back</a>
+        <div class="nav-items">
+            <!-- Hidden on case study to focus reading -->
+        </div>
+        <button class="icon-btn" onclick="copyEmail()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        </button>
+    </nav>
+
+    <main class="case-container">
+        
+        <!-- HEADER -->
+        <header class="case-header fade-up">
+            <h1 class="case-title">Enterprise Analytics Dashboard</h1>
+            <p class="case-lead">Reducing cognitive load for financial analysts through progressive disclosure and data visualization.</p>
+            
+            <div class="meta-data">
+                <div class="meta-box">
+                    <span class="label">Role</span>
+                    <span class="value">Lead Product Designer</span>
+                </div>
+                <div class="meta-box">
+                    <span class="label">Timeline</span>
+                    <span class="value">8 Weeks</span>
+                </div>
+                <div class="meta-box">
+                    <span class="label">Impact</span>
+                    <span class="value highlight">+40% Efficiency</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- VISUAL -->
+        <div class="full-bleed-image fade-up delay-1">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop" alt="Hero Interface">
+        </div>
+
+        <!-- CONTENT -->
+        <article class="case-body">
+            
+            <section class="text-block fade-up">
+                <h3>The Problem</h3>
+                <p>
+                    Financial analysts were spending 20+ minutes generating reports due to a cluttered legacy interface. 
+                    The data density was too high, leading to decision fatigue.
+                </p>
+            </section>
+
+            <section class="text-block fade-up">
+                <h3>The Process</h3>
+                <p>
+                    I conducted user interviews with 12 analysts and mapped their workflows. We found that 80% of the screen space 
+                    was used by metrics they only checked once a month.
+                </p>
+                <ul class="process-list">
+                    <li><strong>Discovery:</strong> Stakeholder interviews & Heatmaps.</li>
+                    <li><strong>Ideation:</strong> Sketching low-fi wireframes.</li>
+                    <li><strong>Design:</strong> Creating a high-fidelity design system.</li>
+                </ul>
+            </section>
+
+            <div class="grid-2-col fade-up">
+                <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2340&auto=format&fit=crop" alt="Wireframes" class="rounded-img">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2340&auto=format&fit=crop" alt="Design System" class="rounded-img">
+            </div>
+
+            <section class="text-block fade-up">
+                <h3>The Solution</h3>
+                <p>
+                    We implemented a "Dashboard Widget" system allowing users to pin their most critical metrics. 
+                    Secondary data was moved to a drill-down view, cleaner the interface significantly.
+                </p>
+            </section>
+
+            <section class="stats-row fade-up">
+                <div class="stat">
+                    <span class="num">40%</span>
+                    <span class="lbl">Faster Reports</span>
+                </div>
+                <div class="stat">
+                    <span class="num">15%</span>
+                    <span class="lbl">DAU Increase</span>
+                </div>
+            </section>
+
+        </article>
+
+        <!-- FOOTER NAV -->
+        <div class="next-project">
+            <a href="index.html">Next Project: Health-Tech Onboarding &rarr;</a>
+        </div>
+
+    </main>
+
+    <div id="toast" class="toast">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <span>Email copied to clipboard</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
