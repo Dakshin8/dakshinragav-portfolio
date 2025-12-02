@@ -3,110 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise Analytics | Dakshin Ragav</title>
+    <title>Enterprise Analytics | Case Study</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="project-body">
 
+    <!-- Scroll Progress Bar -->
     <div class="scroll-progress"></div>
+    <div class="noise-overlay"></div>
+    <div class="aurora-bg"></div>
 
+    <!-- Navigation -->
     <nav class="nav-island fade-down">
-        <a href="index.html" class="logo">&larr; Back</a>
+        <a href="index.html" class="logo">&larr; All Work</a>
         <div class="nav-items">
-            <!-- Hidden on case study to focus reading -->
+            <!-- Hidden intentionally -->
         </div>
-        <button class="icon-btn" onclick="copyEmail()">
+        <button class="icon-btn" onclick="copyEmail()" aria-label="Copy Email">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
         </button>
     </nav>
 
-    <main class="case-container">
-        
-        <!-- HEADER -->
-        <header class="case-header fade-up">
-            <h1 class="case-title">Enterprise Analytics Dashboard</h1>
-            <p class="case-lead">Reducing cognitive load for financial analysts through progressive disclosure and data visualization.</p>
+    <!-- PROJECT HERO -->
+    <header class="project-hero">
+        <div class="container-narrow">
+            <div class="pill-label fade-up">Case Study 01</div>
+            <h1 class="project-title fade-up delay-1">Enterprise Analytics</h1>
+            <p class="project-lead fade-up delay-2">Redefining financial data visualization for 50,000+ daily users, resulting in a 40% reduction in reporting time.</p>
             
-            <div class="meta-data">
-                <div class="meta-box">
-                    <span class="label">Role</span>
+            <div class="hero-visual fade-up delay-3">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop" alt="Dashboard Hero">
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENT LAYOUT -->
+    <main class="project-layout container-narrow">
+        
+        <!-- STICKY SIDEBAR -->
+        <aside class="project-sidebar fade-up delay-3">
+            <div class="sidebar-inner">
+                <div class="meta-group">
+                    <span class="label">My Role</span>
                     <span class="value">Lead Product Designer</span>
                 </div>
-                <div class="meta-box">
+                <div class="meta-group">
                     <span class="label">Timeline</span>
-                    <span class="value">8 Weeks</span>
+                    <span class="value">8 Weeks (Q3 2024)</span>
                 </div>
-                <div class="meta-box">
-                    <span class="label">Impact</span>
-                    <span class="value highlight">+40% Efficiency</span>
+                <div class="meta-group">
+                    <span class="label">Core Team</span>
+                    <span class="value">1 PM, 2 Engineers, Me</span>
                 </div>
+                
+                <hr class="sidebar-divider">
+                
+                <nav class="toc">
+                    <span class="label">Contents</span>
+                    <a href="#context" class="toc-link">01. Context</a>
+                    <a href="#discovery" class="toc-link">02. Discovery</a>
+                    <a href="#solution" class="toc-link">03. The Solution</a>
+                    <a href="#impact" class="toc-link">04. Impact</a>
+                    <a href="#learnings" class="toc-link">05. Learnings</a>
+                </nav>
             </div>
-        </header>
+        </aside>
 
-        <!-- VISUAL -->
-        <div class="full-bleed-image fade-up delay-1">
-            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop" alt="Hero Interface">
-        </div>
-
-        <!-- CONTENT -->
-        <article class="case-body">
+        <!-- MAIN ARTICLE -->
+        <article class="project-content fade-up delay-3">
             
-            <section class="text-block fade-up">
-                <h3>The Problem</h3>
+            <!-- Context -->
+            <section id="context" class="content-block">
+                <h3>The Challenge</h3>
                 <p>
-                    Financial analysts were spending 20+ minutes generating reports due to a cluttered legacy interface. 
-                    The data density was too high, leading to decision fatigue.
+                    Financial analysts at [Company] were spending <strong>20+ minutes</strong> generating a single quarterly report. The legacy dashboard was cluttered with over 50 data points on load, causing severe cognitive overload.
+                </p>
+                <p>
+                    <strong>The Goal:</strong> Streamline the workflow to reduce time-to-value without removing the granular data power users relied on.
                 </p>
             </section>
 
-            <section class="text-block fade-up">
-                <h3>The Process</h3>
+            <!-- Discovery -->
+            <section id="discovery" class="content-block">
+                <h3>Discovery & Research</h3>
                 <p>
-                    I conducted user interviews with 12 analysts and mapped their workflows. We found that 80% of the screen space 
-                    was used by metrics they only checked once a month.
+                    I conducted user interviews with 12 senior analysts and utilized Hotjar heatmaps to understand current behavior.
                 </p>
-                <ul class="process-list">
-                    <li><strong>Discovery:</strong> Stakeholder interviews & Heatmaps.</li>
-                    <li><strong>Ideation:</strong> Sketching low-fi wireframes.</li>
-                    <li><strong>Design:</strong> Creating a high-fidelity design system.</li>
-                </ul>
-            </section>
-
-            <div class="grid-2-col fade-up">
-                <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2340&auto=format&fit=crop" alt="Wireframes" class="rounded-img">
-                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2340&auto=format&fit=crop" alt="Design System" class="rounded-img">
-            </div>
-
-            <section class="text-block fade-up">
-                <h3>The Solution</h3>
-                <p>
-                    We implemented a "Dashboard Widget" system allowing users to pin their most critical metrics. 
-                    Secondary data was moved to a drill-down view, cleaner the interface significantly.
-                </p>
-            </section>
-
-            <section class="stats-row fade-up">
-                <div class="stat">
-                    <span class="num">40%</span>
-                    <span class="lbl">Faster Reports</span>
+                <div class="insight-box">
+                    <strong>Key Insight:</strong> 
+                    80% of the screen real estate was occupied by metrics users only checked once a month.
                 </div>
-                <div class="stat">
-                    <span class="num">15%</span>
-                    <span class="lbl">DAU Increase</span>
+                
+                <div class="image-row">
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2340&auto=format&fit=crop" alt="Sketches">
+                        <figcaption>Initial whiteboard explorations mapping Information Architecture.</figcaption>
+                    </figure>
                 </div>
+            </section>
+
+            <!-- Solution -->
+            <section id="solution" class="content-block">
+                <h3>The Solution: Progressive Disclosure</h3>
+                <p>
+                    We moved from a "Show Everything" model to a "Widget-Based" model. Users can now pin their top 5 critical metrics to the home view, with secondary data accessible via drill-down interactions.
+                </p>
+                <div class="image-full">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2340&auto=format&fit=crop" alt="High Fidelity UI">
+                </div>
+                <p>
+                    I also implemented a strict <strong>Design System</strong> update, moving to a 4pt grid and increasing contrast ratios to meet WCAG AA standards.
+                </p>
+            </section>
+
+            <!-- Impact -->
+            <section id="impact" class="content-block">
+                <h3>The Impact</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="num">40%</span>
+                        <span class="desc">Time Reduction</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="num">+15%</span>
+                        <span class="desc">DAU Increase</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="num">Zero</span>
+                        <span class="desc">Wk 1 Support Tickets</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Learnings -->
+            <section id="learnings" class="content-block">
+                <h3>Retrospective</h3>
+                <p>
+                    <strong>What went well:</strong> Collaborating with engineering early allowed us to use existing API endpoints, saving 2 weeks of dev time.
+                </p>
+                <p>
+                    <strong>Growth Area:</strong> In hindsight, I would have prototyped the "Widget Customization" flow earlier. User testing revealed some friction in the setup process that we had to patch post-launch.
+                </p>
             </section>
 
         </article>
-
-        <!-- FOOTER NAV -->
-        <div class="next-project">
-            <a href="index.html">Next Project: Health-Tech Onboarding &rarr;</a>
-        </div>
-
     </main>
 
+    <!-- FOOTER NAV -->
+    <footer class="project-footer">
+        <div class="footer-nav-container">
+            <span class="next-label">Next Case Study</span>
+            <a href="project.html" class="next-link">Health-Tech Onboarding &rarr;</a>
+        </div>
+    </footer>
+
+    <!-- TOAST -->
     <div id="toast" class="toast">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
         <span>Email copied to clipboard</span>
