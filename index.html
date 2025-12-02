@@ -3,62 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dakshin Ragav</title>
+    <title>Dakshin Ragav | Senior Product Designer</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Inter Tight (Display) & Inter (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Ambient light is now 'fixed' so it stays put while you scroll -->
-    <div class="ambient-light"></div>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
 
-    <div class="app-container">
+    <!-- Floating Navigation Island -->
+    <nav class="nav-island fade-down">
+        <a href="index.html" class="logo">Dakshin<span class="dot">.</span></a>
+        <div class="nav-items">
+            <a href="#work" class="nav-link">Work</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#" class="nav-link">Resume</a>
+        </div>
+        <button class="icon-btn" onclick="copyEmail()" aria-label="Copy Email">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        </button>
+    </nav>
+
+    <main class="main-container">
         
-        <!-- Navigation -->
-        <nav class="nav-bar fade-in">
-            <div class="logo">Dakshin Ragav</div>
-            
-            <div class="status-pill">
-                <span class="pulse-dot"></span>
-                <span class="status-text">Refining Portfolio V2</span>
-            </div>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="hero-content">
-            <div class="text-wrapper">
-                <h1 class="headline fade-up">
-                    Making the complicated,<br>
-                    simple. <span class="gradient-text">Almost there</span>.
-                </h1>
-                <p class="sub-text fade-up delay-1">
-                    Senior UX/UI Designer based in India. <br>
-                    Bridging the gap between complex systems and human intuition.
-                </p>
-            </div>
-        </main>
-
-        <!-- Action Buttons -->
-        <footer class="action-bar fade-up delay-2">
-            
-            <!-- LinkedIn -->
-            <a href="https://www.linkedin.com/in/dakshinragav/" target="_blank" class="pill-btn secondary">
-                <span>LinkedIn</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-            </a>
-
-            <!-- Smart Email Button -->
-            <button class="pill-btn primary" id="emailBtn" onclick="copyEmail()">
-                <div class="btn-content">
-                    <span id="btnLabel">Copy Email</span>
-                    <svg id="btnIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        <!-- HERO -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="badge fade-up">
+                    <span class="status-dot"></span>
+                    Available for new roles
                 </div>
-                <div class="success-bg"></div>
-            </button>
+                <h1 class="hero-title">
+                    <span class="reveal-text">Designing systems</span><br>
+                    <span class="reveal-text delay-1">that feel <span class="highlight">invisible</span>.</span>
+                </h1>
+                <p class="hero-sub fade-up delay-2">
+                    I’m Dakshin Ragav. A Senior UX Designer bridging the gap between 
+                    complex data and human intuition.
+                </p>
+                <div class="hero-actions fade-up delay-3">
+                    <button class="btn btn-primary" onclick="copyEmail()">
+                        <span>Let's Talk</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                    <a href="#work" class="btn btn-text">View Selected Work</a>
+                </div>
+            </div>
+        </section>
 
+        <!-- WORK GRID -->
+        <section id="work" class="work-section">
+            <div class="section-header fade-up">
+                <h2>Selected Work</h2>
+                <span class="line"></span>
+            </div>
+
+            <div class="grid-layout">
+                <!-- Project 1 (Large) -->
+                <a href="project.html" class="project-card large fade-up delay-1">
+                    <div class="card-image">
+                        <!-- REPLACE WITH YOUR IMAGE -->
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop" alt="Fintech Dashboard">
+                    </div>
+                    <div class="card-info">
+                        <div class="tags">
+                            <span class="tag">Fintech</span>
+                            <span class="tag">0-1 Product</span>
+                        </div>
+                        <h3>Enterprise Analytics Dashboard</h3>
+                        <p>Redefining financial data visualization for 50k+ daily users.</p>
+                        <span class="link-arrow">Read Case Study &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Project 2 -->
+                <a href="project.html" class="project-card fade-up delay-2">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2340&auto=format&fit=crop" alt="Health App">
+                    </div>
+                    <div class="card-info">
+                        <div class="tags"><span class="tag">Mobile iOS</span></div>
+                        <h3>Health-Tech Onboarding</h3>
+                        <p>Optimizing FTUE to boost retention by 15%.</p>
+                        <span class="link-arrow">Read Case Study &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="project.html" class="project-card fade-up delay-2">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop" alt="Design System">
+                    </div>
+                    <div class="card-info">
+                        <div class="tags"><span class="tag">Design System</span></div>
+                        <h3>Orbit Design Language</h3>
+                        <p>Scalable component library for SaaS products.</p>
+                        <span class="link-arrow">Read Case Study &rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer id="about" class="site-footer fade-up">
+            <div class="footer-inner">
+                <h2>Ready to build the future?</h2>
+                <div class="footer-links">
+                    <a href="https://linkedin.com" target="_blank" class="footer-link">LinkedIn</a>
+                    <a href="mailto:dakshinragav849@gmail.com" class="footer-link">Email</a>
+                    <a href="#" class="footer-link">Resume</a>
+                </div>
+                <div class="copyright">
+                    © 2025 Dakshin Ragav.
+                </div>
+            </div>
         </footer>
 
+    </main>
+
+    <!-- App-Like Toast Notification -->
+    <div id="toast" class="toast">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <span>Email copied to clipboard</span>
     </div>
 
     <script src="script.js"></script>
