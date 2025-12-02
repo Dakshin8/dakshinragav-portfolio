@@ -3,128 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dakshin Ragav | Senior Product Designer</title>
+    <title>Dakshin Ragav | Product Designer</title>
+    <meta name="description" content="Senior UX Designer specializing in Design Systems and Product Strategy.">
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts: Inter Tight (Display) & Inter (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress"></div>
+    <!-- VISUAL LAYERS -->
+    <div class="noise-overlay"></div>
+    <div class="aurora-bg"></div>
 
-    <!-- Floating Navigation Island -->
+    <!-- NAVIGATION ISLAND -->
     <nav class="nav-island fade-down">
-        <a href="index.html" class="logo">Dakshin<span class="dot">.</span></a>
+        <a href="#hero" class="logo">Dakshin<span class="dot">.</span></a>
+        
         <div class="nav-items">
             <a href="#work" class="nav-link">Work</a>
-            <a href="#about" class="nav-link">About</a>
-            <a href="#" class="nav-link">Resume</a>
+            <a href="#expertise" class="nav-link">Expertise</a>
+            <a href="#experience" class="nav-link">Experience</a>
         </div>
-        <button class="icon-btn" onclick="copyEmail()" aria-label="Copy Email">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-        </button>
+        
+        <div class="nav-actions">
+            <!-- Resume Link -->
+            <a href="#" class="icon-btn" aria-label="Download Resume">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            </a>
+            <!-- Copy Email -->
+            <button class="icon-btn" onclick="copyEmail()" aria-label="Copy Email">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </button>
+        </div>
     </nav>
 
     <main class="main-container">
         
-        <!-- HERO -->
-        <section class="hero-section">
+        <!-- HERO SECTION -->
+        <section id="hero" class="hero-section">
             <div class="hero-content">
-                <div class="badge fade-up">
-                    <span class="status-dot"></span>
-                    Available for new roles
+                <div class="status-pill fade-up">
+                    <span class="pulsing-dot"></span>
+                    <span>Open to opportunities</span>
                 </div>
+                
                 <h1 class="hero-title">
-                    <span class="reveal-text">Designing systems</span><br>
-                    <span class="reveal-text delay-1">that feel <span class="highlight">invisible</span>.</span>
+                    <span class="line-wrap"><span class="reveal-text">Designing systems</span></span>
+                    <span class="line-wrap"><span class="reveal-text delay-1">that bring <span class="highlight">clarity</span></span></span>
+                    <span class="line-wrap"><span class="reveal-text delay-2">to the complex.</span></span>
                 </h1>
-                <p class="hero-sub fade-up delay-2">
-                    I’m Dakshin Ragav. A Senior UX Designer bridging the gap between 
-                    complex data and human intuition.
+                
+                <p class="hero-sub fade-up delay-3">
+                    Senior UX Designer specializing in data-heavy interfaces. 
+                    Bridging the gap between engineering and human intuition.
                 </p>
+                
                 <div class="hero-actions fade-up delay-3">
-                    <button class="btn btn-primary" onclick="copyEmail()">
-                        <span>Let's Talk</span>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </button>
-                    <a href="#work" class="btn btn-text">View Selected Work</a>
+                    <a href="#work" class="btn btn-primary">View Selected Work</a>
+                    <button class="btn btn-text" onclick="copyEmail()">Contact Me</button>
                 </div>
             </div>
         </section>
 
-        <!-- WORK GRID -->
-        <section id="work" class="work-section">
+        <!-- WORK SECTION -->
+        <section id="work" class="section-padding">
             <div class="section-header fade-up">
-                <h2>Selected Work</h2>
-                <span class="line"></span>
+                <h2 class="section-title">Selected Case Studies</h2>
             </div>
 
-            <div class="grid-layout">
+            <div class="work-grid">
                 <!-- Project 1 (Large) -->
-                <a href="project.html" class="project-card large fade-up delay-1">
-                    <div class="card-image">
-                        <!-- REPLACE WITH YOUR IMAGE -->
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop" alt="Fintech Dashboard">
+                <a href="project.html" class="project-card large fade-up">
+                    <div class="card-visual">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop" alt="Fintech Dashboard Interface">
+                        <div class="hover-overlay">View Case Study</div>
                     </div>
-                    <div class="card-info">
+                    <div class="card-meta">
                         <div class="tags">
                             <span class="tag">Fintech</span>
-                            <span class="tag">0-1 Product</span>
+                            <span class="tag">Web App</span>
                         </div>
                         <h3>Enterprise Analytics Dashboard</h3>
-                        <p>Redefining financial data visualization for 50k+ daily users.</p>
-                        <span class="link-arrow">Read Case Study &rarr;</span>
+                        <p>Reducing cognitive load for 50k+ daily active users.</p>
+                        <span class="read-more">Read Case Study &rarr;</span>
                     </div>
                 </a>
 
                 <!-- Project 2 -->
-                <a href="project.html" class="project-card fade-up delay-2">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2340&auto=format&fit=crop" alt="Health App">
+                <a href="project.html" class="project-card fade-up delay-1">
+                    <div class="card-visual">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2340&auto=format&fit=crop" alt="Health App Interface">
                     </div>
-                    <div class="card-info">
-                        <div class="tags"><span class="tag">Mobile iOS</span></div>
+                    <div class="card-meta">
+                        <div class="tags"><span class="tag">iOS</span><span class="tag">Growth</span></div>
                         <h3>Health-Tech Onboarding</h3>
-                        <p>Optimizing FTUE to boost retention by 15%.</p>
-                        <span class="link-arrow">Read Case Study &rarr;</span>
+                        <p>Optimizing the FTUE to boost retention by 15%.</p>
+                        <span class="read-more">Read Case Study &rarr;</span>
                     </div>
                 </a>
 
                 <!-- Project 3 -->
-                <a href="project.html" class="project-card fade-up delay-2">
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop" alt="Design System">
+                <a href="project.html" class="project-card fade-up delay-1">
+                    <div class="card-visual">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop" alt="Design System Components">
                     </div>
-                    <div class="card-info">
+                    <div class="card-meta">
                         <div class="tags"><span class="tag">Design System</span></div>
                         <h3>Orbit Design Language</h3>
-                        <p>Scalable component library for SaaS products.</p>
-                        <span class="link-arrow">Read Case Study &rarr;</span>
+                        <p>A scalable component library for SaaS products.</p>
+                        <span class="read-more">Read Case Study &rarr;</span>
                     </div>
                 </a>
             </div>
         </section>
 
+        <!-- EXPERTISE SECTION -->
+        <section id="expertise" class="section-padding">
+            <div class="section-header fade-up">
+                <h2 class="section-title">Expertise</h2>
+            </div>
+            
+            <div class="skills-grid fade-up delay-1">
+                <div class="skill-col">
+                    <h3 class="skill-head">Product Strategy</h3>
+                    <ul class="skill-list">
+                        <li>Design Systems</li>
+                        <li>Information Architecture</li>
+                        <li>User Research</li>
+                        <li>Data Visualization</li>
+                        <li>A/B Testing</li>
+                    </ul>
+                </div>
+                <div class="skill-col">
+                    <h3 class="skill-head">Design</h3>
+                    <ul class="skill-list">
+                        <li>UI Interaction</li>
+                        <li>Prototyping (High-Fi)</li>
+                        <li>Motion Design</li>
+                        <li>Accessibility (WCAG)</li>
+                        <li>Mobile (iOS/Android)</li>
+                    </ul>
+                </div>
+                <div class="skill-col">
+                    <h3 class="skill-head">Technical</h3>
+                    <ul class="skill-list">
+                        <li>Figma (Advanced)</li>
+                        <li>HTML / CSS</li>
+                        <li>React (Basic)</li>
+                        <li>Spline (3D)</li>
+                        <li>Principle</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHILOSOPHY BREAK -->
+        <section class="philosophy-section fade-up">
+            <h2 class="philosophy-quote">
+                "Design is not just about making things look good. It’s about <span class="highlight-blue">orchestrating clarity</span> in a chaotic world."
+            </h2>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section id="experience" class="section-padding">
+            <div class="section-header fade-up">
+                <h2 class="section-title">Experience</h2>
+            </div>
+
+            <div class="timeline-wrapper fade-up delay-1">
+                <div class="timeline-row">
+                    <div class="t-date">2023 — Present</div>
+                    <div class="t-role">
+                        <h3>Senior Product Designer</h3>
+                        <span class="t-company">TechFlow Solutions</span>
+                    </div>
+                    <div class="t-desc">Leading a team of 4 designers. Spearheaded the redesign of the core SaaS platform, increasing DAU by 20%.</div>
+                </div>
+                
+                <div class="timeline-row">
+                    <div class="t-date">2021 — 2023</div>
+                    <div class="t-role">
+                        <h3>UX/UI Designer</h3>
+                        <span class="t-company">Creative Pulse Agency</span>
+                    </div>
+                    <div class="t-desc">Designed end-to-end mobile experiences for Fintech clients. Established the agency's first internal design system.</div>
+                </div>
+
+                <div class="timeline-row">
+                    <div class="t-date">2019 — 2021</div>
+                    <div class="t-role">
+                        <h3>Product Designer</h3>
+                        <span class="t-company">StartUp Inc.</span>
+                    </div>
+                    <div class="t-desc">First designer hire. Collaborated directly with founders to launch MVP products for iOS and Web.</div>
+                </div>
+            </div>
+        </section>
+
         <!-- FOOTER -->
-        <footer id="about" class="site-footer fade-up">
-            <div class="footer-inner">
-                <h2>Ready to build the future?</h2>
+        <footer class="site-footer">
+            <div class="footer-content">
+                <h2>Dakshin Ragav<span class="dot">.</span></h2>
                 <div class="footer-links">
-                    <a href="https://linkedin.com" target="_blank" class="footer-link">LinkedIn</a>
-                    <a href="mailto:dakshinragav849@gmail.com" class="footer-link">Email</a>
-                    <a href="#" class="footer-link">Resume</a>
+                    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+                    <a href="mailto:dakshinragav849@gmail.com">Email</a>
+                    <a href="#">Resume</a>
                 </div>
-                <div class="copyright">
-                    © 2025 Dakshin Ragav.
-                </div>
+                <p class="copyright">© 2025. Crafted with precision.</p>
             </div>
         </footer>
 
     </main>
 
-    <!-- App-Like Toast Notification -->
+    <!-- TOAST NOTIFICATION -->
     <div id="toast" class="toast">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
         <span>Email copied to clipboard</span>
