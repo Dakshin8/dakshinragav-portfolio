@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me | Dakshin Ragav</title>
+  
+  <style>
+    /* --- Core Design System --- */
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-accent-light: #f1f5f9; 
+      --text-primary: #0f172a;    
+      --text-secondary: #475569;  
+      --text-muted: #94a3b8;      
+      --accent: #0f172a;          
+      --card-border: rgba(15, 23, 42, 0.08);
+      --nav-bg: rgba(248, 250, 252, 0.85);
+      
+      --font-stack: 'Aptos', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 7rem; }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-stack);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 0 2rem;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* --- Animations & Utilities --- */
+    #top-loader {
+      position: fixed; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--text-primary), transparent);
+      z-index: 9999; transform: translateX(-100%);
+      animation: loadPage 1.4s cubic-bezier(0.65, 0.05, 0.36, 1) forwards;
+    }
+    @keyframes loadPage {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(0%); }
+      100% { transform: translateX(100%); }
+    }
+    .reveal-el {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-el.active { opacity: 1; transform: translateY(0); }
+
+    /* --- Navigation --- */
+    header {
+      position: sticky; top: 0; z-index: 1000;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      padding: 1.5rem 0; display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid transparent; transition: padding 0.3s ease, border-color 0.3s ease;
+    }
+    header.scrolled { padding: 1rem 0; border-color: var(--card-border); }
+    .logo { display: inline-flex; align-items: center; text-decoration: none; }
+    .logo-img { height: 60px; width: auto; object-fit: contain; transition: opacity 0.3s ease; }
+    .logo:hover .logo-img { opacity: 0.7; }
+    
+    .nav-actions { display: flex; align-items: center; gap: 2rem; }
+    .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: var(--transition); position: relative; }
+    .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background-color: var(--text-primary); transition: var(--transition); }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link:hover { color: var(--text-primary); }
+    
+    .btn-download {
+      background-color: var(--text-primary); color: var(--bg-primary);
+      padding: 0.6rem 1.2rem; border-radius: 50px; font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
+      transition: var(--transition); box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+    }
+    .btn-download:hover { background-color: var(--text-secondary); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(15, 23, 42, 0.15); }
+    .btn-download svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.5; }
+
+    /* --- Shared Section Headers --- */
+    .section-header { margin-bottom: 3rem; }
+    .section-title { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.02em; }
+    .section-desc { font-size: 1.1rem; color: var(--text-secondary); font-weight: 400; line-height: 1.7; max-width: 850px; margin-top: 1rem; }
+
+    /* --- About Hero Section --- */
+    .about-hero {
+      padding: 4rem 0 5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+
+    .about-photo-wrap {
+      width: 100%; 
+      height: 540px; 
+      background-color: var(--bg-card); 
+      border: 1px solid var(--card-border);
+      border-radius: 24px; 
+      overflow: hidden; 
+    }
+
+    .about-image { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+    }
+
+    .about-text {
+      max-width: 850px; 
+    }
+    
+    .about-eyebrow {
+      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--text-primary); font-weight: 700; margin-bottom: 1.5rem;
+      display: inline-block; background: var(--bg-accent-light);
+      padding: 0.3rem 0.75rem; border-radius: 6px;
+    }
+    
+    .about-title {
+      font-size: clamp(2rem, 3.2vw, 2.2rem);
+      line-height: 1.2; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 1.5rem;
+    }
+    
+    .about-desc {
+      font-size: 1.1rem; color: var(--text-secondary); font-weight: 400; line-height: 1.7; margin-bottom: 1.5rem;
+    }
+
+    /* --- Education Section --- */
+    .education-section { padding: 5rem 0; border-top: 1px solid var(--card-border); }
+    
+    .exp-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 3rem; }
+    .exp-row {
+      display: grid; grid-template-columns: 220px 1fr;
+      background-color: var(--bg-card); border: 1px solid var(--card-border);
+      padding: 2.5rem; border-radius: 20px; align-items: start; gap: 2rem;
+      transition: var(--transition); position: relative; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.01);
+    }
+    .exp-row::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+      background: var(--text-primary); transform: scaleY(0); transform-origin: top;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .exp-row:hover { border-color: var(--text-muted); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(15, 23, 42, 0.04); }
+    .exp-row:hover::before { transform: scaleY(1); }
+    
+    .exp-meta-side { display: flex; flex-direction: column; gap: 0.5rem; }
+    .exp-time { font-size: 0.95rem; color: var(--text-primary); font-weight: 600; }
+    .exp-location { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+    
+    .exp-body { display: flex; flex-direction: column; gap: 0.5rem; }
+    .exp-role { font-size: 1.35rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.01em; margin-bottom: 0.5rem; }
+    .exp-role span { font-weight: 500; color: var(--text-secondary); }
+    .exp-desc { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+
+    /* --- Interest Works (4-Column Asymmetrical Grid) --- */
+    .interests-section { padding: 5rem 0 8rem 0; }
+    
+    .asym-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* Changed to 4 in a row */
+      gap: 1.5rem;
+      padding-bottom: 3.5rem; /* Accounts for the pushed-down cards */
+    }
+
+    .asym-card {
+      width: 100%;
+      height: 320px; /* Adjusted height for narrower columns */
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      cursor: pointer;
+    }
+
+    /* Pushes every even column down to create asymmetry */
+    .asym-card:nth-child(even) {
+      transform: translateY(3.5rem);
+    }
+
+    .asym-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* --- Lightbox Overlay --- */
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 99999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 2rem; right: 2.5rem;
+      color: white;
+      font-size: 2.5rem;
+      cursor: pointer;
+      line-height: 1;
+      font-weight: 300;
+      transition: opacity 0.2s ease;
+    }
+
+    .lightbox-close:hover {
+      opacity: 0.7;
+    }
+
+    /* --- Footer --- */
+    footer { border-top: 1px solid var(--card-border); padding: 6rem 0 4rem 0; text-align: center; }
+    .footer-title { font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+    .footer-email { font-size: 1.35rem; color: var(--text-primary); text-decoration: none; font-weight: 700; display: inline-block; padding-bottom: 4px; border-bottom: 2px solid transparent; transition: var(--transition); margin-bottom: 2.5rem; }
+    .footer-email:hover { border-color: var(--text-primary); color: var(--text-secondary); }
+    .footer-links { display: flex; justify-content: center; align-items: center; gap: 2.5rem; margin-bottom: 2.5rem; }
+    .text-link { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: var(--transition); position: relative; padding-bottom: 2px; }
+    .text-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background-color: var(--text-primary); transition: var(--transition); }
+    .text-link:hover::after { width: 100%; }
+    .text-link:hover { color: var(--text-primary); }
+    .footer-meta { margin-top: 2rem; font-size: 0.85rem; color: var(--text-muted); }
+
+    /* --- Responsive --- */
+    @media (max-width: 992px) {
+      .exp-row { grid-template-columns: 1fr; gap: 1.25rem; padding: 2rem; }
+      .exp-meta-side { flex-direction: row; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--card-border); padding-bottom: 1rem; }
+      
+      /* Drops to 2 columns on tablets */
+      .asym-grid { grid-template-columns: repeat(2, 1fr); }
+      .asym-card { height: 350px; }
+    }
+    @media (max-width: 768px) {
+      .about-photo-wrap { height: 300px; }
+      
+      /* Drops to 1 column on mobile to save space */
+      .asym-grid { grid-template-columns: 1fr; gap: 1.5rem; padding-bottom: 0; }
+      .asym-card:nth-child(even) { transform: none; } /* Disables staggering on mobile */
+      .asym-card { height: 320px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="top-loader"></div>
+
+  <div class="container">
+    <header>
+      <a href="index.html" class="logo">
+        <img src="Logo-02.svg" alt="Dakshin Ragav Logo" class="logo-img">
+      </a>
+      
+      <div class="nav-actions">
+         <a href="about.html" class="nav-link" style="color: var(--text-primary); font-weight: 700;">About me</a>
+        <a href="index.html#work" class="nav-link">Work</a>
+        <a href="index.html#experience" class="nav-link">Experience</a>
+        
+        <a href="resume.pdf" download class="btn-download">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Resume
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="about-hero reveal-el">
+        <div class="about-photo-wrap">
+          <img src="aboutimage.png" alt="Dakshin Ragav" class="about-image" />
+        </div>
+
+<div class="about-text">
+    <h1 class="about-title">
+        Hi, I'm Dakshin Ragav, a User Experience Designer based in Chennai.
+    </h1>
+
+    <p class="about-desc">
+        With nearly <strong>seven years of experience</strong> in UX design, I've had the opportunity to design digital products across different industries, creating experiences that solve real problems and deliver meaningful impact for users. My journey began in <strong>2019</strong> at my college senior's design agency, where working on live client projects gave me early exposure to the complete product design process and taught me the value of designing with purpose.
+    </p>
+
+    <p class="about-desc">
+        Over the years, I've been involved in every stage of the design journey, from understanding user needs and defining product strategy to creating wireframes, interaction designs, high-fidelity interfaces, prototypes, usability testing, and collaborating closely with developers to bring ideas to life. I enjoy taking ownership of the entire design process and believe the best products are built through curiosity, collaboration, and continuous iteration.
+    </p>
+
+    <p class="about-desc">
+        To strengthen my design foundation, I earned a Bachelor's degree in <strong>Visual Communication</strong> from <strong>Sathyabama Institute of Science and Technology</strong>. Driven by my curiosity to better understand how people interact with digital products, I also completed a <strong>UX Design Certification</strong> at <strong>UXMint, Chennai</strong>, where I further developed my skills in user-centered design, research methodologies, design thinking, and product strategy.
+    </p>
+
+    <p class="about-desc">
+        The most rewarding part of my work is seeing the products I've designed being used by thousands of people. Knowing that my work helps make someone's experience simpler, faster, or more enjoyable is what motivates me to keep learning and improving with every project.
+    </p>
+
+    <p class="about-desc">
+        
+    </p>
+
+    <p class="about-desc">
+        Looking ahead, my goal is to become a <strong>Design Leader</strong>, building products that create meaningful impact while mentoring the next generation of designers and helping them grow into thoughtful problem solvers.
+    </p>
+</div>
+
+      <!-- Education Section -->
+      <section class="education-section reveal-el">
+        <div class="section-header">
+          <h2 class="section-title">Education</h2>
+        </div>
+
+        <div class="exp-grid">
+          
+          <div class="exp-row">
+            <div class="exp-meta-side">
+              <div class="exp-time">2016 — 2019</div>
+              <div class="exp-location">Chennai, India</div>
+            </div>
+            
+            <div class="exp-body">
+              <h3 class="exp-role">Visual Communication (B.Sc) <span>@ Sathyabama Institute of Science and Technology</span></h3>
+              <p class="exp-desc">Graduated with honors. Focused on Human-Computer Interaction, cognitive psychology in design, and digital product strategy. Led the university design club.</p>
+            </div>
+          </div>
+
+          <div class="exp-row">
+            <div class="exp-meta-side">
+              <div class="exp-time">2021</div>
+              <div class="exp-location">Chennai, India</div>
+            </div>
+            
+            <div class="exp-body">
+              <h3 class="exp-role">College Freshers Program <span>@ UX Mint Academy</span></h3>
+              <p class="exp-desc">Specialized certification in building scalable design systems and advanced front-end token management.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Interest Works (8 Items, 4-in-a-row) -->
+      <section class="interests-section reveal-el">
+        <div class="section-header">
+          <h2 class="section-title">Off the Canvas</h2>
+          <p class="section-desc">
+             Outside of design, I'm a quiet and detail-oriented person who enjoys travelling, photography, filmmaking, Logo creation and writing stories. These creative interests have taught me to observe people closely, appreciate the finer details, and approach design with empathy and curiosity.
+        </div>
+
+        <!-- Asymmetrical Grid -->
+        <div class="asym-grid">
+          
+          <!-- Row 1 -->
+          <div class="asym-card">
+            <img src="Ph1.jpg" alt="Photography Interest">
+          </div>
+          
+          <div class="asym-card">
+            <img src="ph2.jpg" alt="Gaming Setup">
+          </div>
+
+          <div class="asym-card">
+            <img src="ph3.jpg" alt="Reading">
+          </div>
+
+          <div class="asym-card">
+            <img src="ph4.jpg " alt="Workspace Setup">
+          </div>
+
+          <!-- Row 2 -->
+          <div class="asym-card">
+            <img src="ph5.jpg" alt="Architecture">
+          </div>
+          
+          <div class="asym-card">
+            <img src="ph6.jpg" alt="Coding">
+          </div>
+
+          <div class="asym-card">
+            <img src="ph7.jpg" alt="Abstract Art">
+          </div>
+
+          <div class="asym-card">
+            <img src="ph8.jpg" alt="Hardware">
+          </div>
+
+
+   
+      </section>
+
+    </main>
+
+    <footer class="reveal-el">
+      <h2 class="footer-title">Have an idea? I'd love to hear it.</h2>
+      <a href="mailto:dakshinragav849@gmail.com" class="footer-email">dakshinragav849@gmail.com</a>
+      
+      <!-- Cleaned up Text Links -->
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/dakshinragav/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bfir8WmvRTlG7xDy%2BXU6ANQ%3D%3D" target="_blank" class="text-link">LinkedIn</a>
+        <a href="https://www.behance.net/dakshinragav" target="_blank" class="text-link">Behance</a>
+        <a href="tel:+917667642718" class="text-link">Contact</a>
+      </div>
+
+      <p class="footer-meta">© 2026.Dakshin Ragav</p>
+    </footer>
+  </div>
+
+  <!-- Lightbox DOM Element -->
+  <div class="lightbox" id="imageLightbox">
+    <div class="lightbox-close" id="closeLightbox">&times;</div>
+    <img src="" alt="Enlarged view" id="lightboxImage">
+  </div>
+
+  <script>
+    // Sticky Header Logic
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Scroll Reveal Logic
+    const revealElements = document.querySelectorAll('.reveal-el');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: "0px 0px -50px 0px"
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Lightbox Interaction Logic
+    const cards = document.querySelectorAll('.asym-card');
+    const lightbox = document.getElementById('imageLightbox');
+    const lightboxImg = document.getElementById('lightboxImage');
+    const closeBtn = document.getElementById('closeLightbox');
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const imageSrc = card.querySelector('img').src;
+        lightboxImg.src = imageSrc;
+        lightbox.classList.add('active');
+      });
+    });
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('active');
+      setTimeout(() => { lightboxImg.src = ''; }, 300);
+    };
+
+    closeBtn.addEventListener('click', closeLightbox);
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>

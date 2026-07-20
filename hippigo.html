@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HippiGo Case Study | Alex.Design</title>
+  
+  <style>
+    /* --- CSS Custom Variables --- */
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-accent-light: #f1f5f9; 
+      --text-primary: #0f172a;    
+      --text-secondary: #475569;  
+      --text-muted: #94a3b8;      
+      --accent: #0f172a;          
+      --card-border: rgba(15, 23, 42, 0.08);
+      --nav-bg: rgba(248, 250, 252, 0.85);
+      
+      /* Emo Web Accent Colors */
+      --emo-joy: #f59e0b;
+      --emo-interest: #0ea5e9;
+      --emo-hope: #10b981;
+      --emo-frustration: #ef4444;
+      --emo-sad: #dc2626;
+      --emo-happy: #3b82f6;
+      --emo-willing: #059669;
+      --emo-overwhelmed: #ea580c;
+
+      --font-stack: 'Aptos', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* --- Reset & Base Styles --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 7rem;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-stack);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 0 2rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* --- Top Page Loader Animation --- */
+    #top-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--text-primary), transparent);
+      z-index: 9999;
+      transform: translateX(-100%);
+      animation: loadPage 1.4s cubic-bezier(0.65, 0.05, 0.36, 1) forwards;
+    }
+
+    @keyframes loadPage {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(0%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* --- Scroll-Driven Reveal --- */
+    .reveal-el {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-el.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- Navigation --- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 1.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid transparent;
+      transition: padding 0.3s ease, border-color 0.3s ease;
+    }
+
+    header.scrolled {
+      padding: 1rem 0;
+      border-color: var(--card-border);
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo-img {
+      height: 60px;
+      width: auto;
+      object-fit: contain;
+      transition: opacity 0.3s ease;
+    }
+    
+    .logo:hover .logo-img {
+      opacity: 0.7;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--text-primary);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .btn-back {
+      background-color: var(--text-primary);
+      color: var(--bg-primary);
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+    }
+
+    .btn-back:hover {
+      background-color: var(--text-secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.15);
+    }
+
+    /* --- Case Study Hero Layout --- */
+    .cs-hero {
+      padding: 6rem 0 3rem 0;
+    }
+
+    .cs-hero-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .cs-hero-text {
+      flex: 1;
+      max-width: 720px;
+    }
+
+    .cs-hero-visual {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 280px; /* Dictates the max size of the logo block */
+    }
+
+    .cs-hero-side-logo {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .cs-eyebrow {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-primary);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      background: var(--bg-accent-light);
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+    }
+
+    .cs-title {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.8rem;
+    }
+
+    .cs-title em {
+      font-style: normal;
+      color: #83bb2f;
+      border-bottom: 3px solid #83bb2f;
+    }
+
+    .cs-desc {
+      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+      color: var(--text-secondary);
+      font-weight: 400;
+      margin-bottom: 2rem;
+    }
+
+    /* --- Project Metadata Matrix --- */
+    .cs-meta-matrix {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      padding: 2.2rem;
+      background-color: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+      margin-bottom: 4rem;
+    }
+
+    .meta-block h4 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .meta-block p {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .meta-tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .meta-mini-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      background: var(--bg-accent-light);
+      color: var(--text-primary);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    /* --- Immersive Case Image --- */
+    .cs-main-display {
+      width: 100%;
+      height: 480px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+      overflow: hidden;
+      margin-bottom: 5rem;
+    }
+
+    .cs-main-display img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* --- Complex Split Layout Architecture --- */
+    .cs-split-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* Sticky Technical Index Navigation */
+    .cs-sticky-index {
+      position: sticky;
+      top: 10rem;
+    }
+
+    .index-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .index-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .index-trigger {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .index-trigger::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 0;
+      background-color: var(--text-primary);
+      transition: var(--transition);
+    }
+
+    .index-trigger:hover, 
+    .index-trigger.active {
+      color: var(--text-primary);
+    }
+
+    .index-trigger:hover::before, 
+    .index-trigger.active::before {
+      height: 16px;
+    }
+
+    /* --- Layout Narrative Stream --- */
+    .cs-narrative {
+      max-width: 760px;
+    }
+
+    .narrative-block {
+      margin-bottom: 6rem;
+      scroll-margin-top: 9rem;
+    }
+
+    .narrative-block h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .narrative-block p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.65;
+    }
+
+    .narrative-block h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 3rem 0 1.25rem 0;
+      letter-spacing: -0.01em;
+    }
+
+    /* Premium Data Insight Layout Cards */
+    .insight-matrix-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+    }
+
+    .insight-node-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--card-border);
+      padding: 2.2rem;
+      border-radius: 20px;
+      transition: var(--transition);
+    }
+
+    .insight-node-card:hover {
+      border-color: var(--text-primary);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
+    }
+
+    .insight-node-card h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .insight-node-card p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+
+    /* --- EMO WEB SPECIFIC STYLES --- */
+    .emo-web-wrapper {
+      margin: 3rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .emo-persona-section {
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.02);
+    }
+
+    .emo-persona-header {
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--bg-accent-light);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .emo-persona-header h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .emo-grid-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background-color: var(--card-border); 
+      gap: 1px;
+    }
+
+    .emo-quadrant {
+      background-color: var(--bg-card);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .emo-quadrant.joy { border-top: 4px solid var(--emo-joy); }
+    .emo-quadrant.interest { border-top: 4px solid var(--emo-interest); }
+    .emo-quadrant.hope { border-top: 4px solid var(--emo-hope); }
+    .emo-quadrant.frustration { border-top: 4px solid var(--emo-frustration); }
+    
+    .emo-quadrant.sad { border-top: 4px solid var(--emo-sad); }
+    .emo-quadrant.happy { border-top: 4px solid var(--emo-happy); }
+    .emo-quadrant.willing { border-top: 4px solid var(--emo-willing); }
+    .emo-quadrant.overwhelmed { border-top: 4px solid var(--emo-overwhelmed); }
+
+    .emo-quad-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .emo-quadrant.joy .emo-quad-title { color: var(--emo-joy); }
+    .emo-quadrant.interest .emo-quad-title { color: var(--emo-interest); }
+    .emo-quadrant.hope .emo-quad-title { color: var(--emo-hope); }
+    .emo-quadrant.frustration .emo-quad-title { color: var(--emo-frustration); }
+    .emo-quadrant.sad .emo-quad-title { color: var(--emo-sad); }
+    .emo-quadrant.happy .emo-quad-title { color: var(--emo-happy); }
+    .emo-quadrant.willing .emo-quad-title { color: var(--emo-willing); }
+    .emo-quadrant.overwhelmed .emo-quad-title { color: var(--emo-overwhelmed); }
+
+    .emo-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .emo-list li {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      font-weight: 500;
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .emo-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+    }
+
+    /* Minimal Outcomes Cards */
+    .outcome-node-card {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .outcome-metrics-mega {
+      font-size: 3.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.04em;
+    }
+
+    .outcome-metrics-lbl {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    /* --- System Structural Process Flows --- */
+    .process-pipeline-wrap {
+      background-color: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin: 2rem 0;
+    }
+
+    .pipeline-list {
+      list-style-type: none;
+    }
+
+    .pipeline-step {
+      position: relative;
+      padding-left: 2.2rem;
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .pipeline-step:last-child {
+      margin-bottom: 0;
+    }
+
+    .pipeline-step::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.4rem;
+      width: 8px;
+      height: 8px;
+      background-color: var(--text-primary);
+      border-radius: 50%;
+    }
+
+    .pipeline-step::after {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 1.3rem;
+      bottom: -1.5rem;
+      width: 1px;
+      background-color: var(--card-border);
+    }
+
+    .pipeline-step:last-child::after {
+      display: none;
+    }
+
+    .pipeline-sub-steps {
+      list-style-type: none;
+      padding-left: 0;
+      margin-top: 0.75rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+
+    .pipeline-sub-steps li {
+      position: relative;
+      padding-left: 1.2rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .pipeline-sub-steps li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+    }
+
+    /* --- System Design Token Showcase --- */
+    .token-showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0 3.5rem 0;
+    }
+
+    .token-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: var(--transition);
+    }
+
+    .token-card:hover {
+      border-color: var(--text-primary);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
+    }
+
+    .token-card h4 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+
+    .token-swatch-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .token-swatch-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .token-swatch {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .token-meta-desc p {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .token-meta-desc span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: monospace;
+      background: var(--bg-primary);
+      padding: 0.15rem 0.3rem;
+      border-radius: 4px;
+    }
+
+    .token-font-mega {
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .token-font-weights {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .token-spec-table {
+      list-style: none;
+    }
+
+    .token-spec-table li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.6rem 0;
+      color: var(--text-secondary);
+    }
+
+    .token-spec-table li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .token-spec-table span {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* --- Case Study CTA --- */
+    .cs-cta-container {
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--card-border);
+      text-align: left;
+    }
+
+    .btn-cta {
+      background-color: var(--text-primary);
+      color: var(--bg-primary);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.1);
+    }
+
+    .btn-cta:hover {
+      background-color: var(--text-secondary);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(15, 23, 42, 0.15);
+      color: var(--bg-primary);
+    }
+
+    .btn-cta svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* --- Footer --- */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 6rem 0 4rem 0;
+      text-align: center;
+    }
+
+    .footer-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-email {
+      font-size: 1.35rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-block;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition);
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-email:hover {
+      border-color: var(--text-primary);
+      color: var(--text-secondary);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .text-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .text-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background-color: var(--text-primary);
+      transition: var(--transition);
+    }
+
+    .text-link:hover::after {
+      width: 100%;
+    }
+
+    .text-link:hover {
+      color: var(--text-primary);
+    }
+
+    .footer-meta {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* --- Technical Responsive Framework Breakpoints --- */
+    @media (max-width: 992px) {
+      .cs-split-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .cs-sticky-index {
+        display: none; 
+      }
+      .cs-main-display {
+        height: 320px;
+        margin-bottom: 3.5rem;
+      }
+      .insight-matrix-row {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      body {
+        padding: 0 1.5rem;
+      }
+      .emo-grid-2x2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .cs-hero {
+        padding-top: 4rem;
+      }
+      .cs-hero-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+      }
+      .cs-hero-visual {
+        max-width: 180px; /* Scales down logo container for mobile */
+      }
+      .cs-meta-matrix {
+        padding: 1.5rem;
+        gap: 1.5rem;
+      }
+      .process-pipeline-wrap {
+        padding: 1.5rem;
+      }
+      .cs-cta-container {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Animated Loader Line -->
+  <div id="top-loader"></div>
+
+  <div class="container">
+    <!-- Header Architecture -->
+    <header>
+      <a href="index.html" class="logo">
+        <img src="Logo-02.svg" alt="Dakshin Ragav Logo" class="logo-img">
+      </a>
+      <div class="nav-actions">
+        <a href="aboutme.html" class="nav-link">About me</a>
+        <a href="index.html#work" class="nav-link">Work</a>
+        <a href="index.html#experience" class="nav-link">Experience</a>
+        
+        <a href="index.html#work" class="btn-back">
+          &larr; Back to Work
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <!-- Case Study Hero -->
+      <section class="cs-hero reveal-el">
+        <div class="cs-hero-content">
+          <!-- Text Content Wrapper -->
+          <div class="cs-hero-text">
+            <div class="cs-eyebrow">Transit & Systems Case Study</div>
+            <h1 class="cs-title">
+             HippiGo: Designing a seamless ecosystem for <em style="color: #83bb2f; font-style: normal;">Urban Transit Efficiency</em>
+            </h1>
+            <p class="cs-desc">
+              Designed a multi-modal transit platform that simplifies everyday commuting by combining real-time journey planning with a seamless digital payment experience.<br>Full case study in behance link below.
+            </p>
+          </div>
+          
+          <!-- Visual Logo Wrapper -->
+          <div class="cs-hero-visual">
+            <img src="Hippi Go Logo-03-02-02-01.png" alt="HippiGo Brand Logo" class="cs-hero-side-logo">
+          </div>
+        </div>
+      </section>
+
+      <!-- Project Metadata Matrix Area -->
+      <section class="cs-meta-matrix reveal-el">
+        <div class="meta-block">
+          <h4>Role</h4>
+          <p>Lead Product Designer</p>
+          <div class="meta-tag-group">
+            <span class="meta-mini-tag">UX Research</span>
+            <span class="meta-mini-tag">Product Strategy</span>
+          </div>
+        </div>
+        <div class="meta-block">
+          <h4>Platform</h4>
+          <p>iOS, Android</p>
+        </div>
+        <div class="meta-block">
+          <h4>Timeline</h4>
+          <p>12 Weeks (End-to-End)</p>
+        </div>
+        <div class="meta-block">
+          <h4>Core Impact</h4>
+          <p>42% increase in digital wallet adoption</p>
+        </div>
+      </section>
+
+      <!-- Main Overview Hero Display Asset -->
+      <div class="cs-main-display reveal-el">
+        <img src="Hippigo(in).jpg" alt="HippiGo Platform Visual Architecture Asset">
+      </div>
+
+      <!-- Main Layout Technical Split -->
+      <div class="cs-split-grid">
+        
+        <!-- Sticky Sidebar System Navigation Index -->
+        <aside class="cs-sticky-index reveal-el">
+          <div class="index-label">Case Analysis</div>
+          <div class="index-links">
+            <a href="#context" class="index-trigger active">The Challenge</a>
+            <a href="#architecture" class="index-trigger">Designing the Solution</a>
+            <a href="#design" class="index-trigger">The Experience</a>
+            <a href="#outcomes" class="index-trigger">The Results</a>
+          </div>
+        </aside>
+
+        <!-- Main Narrative Pipeline Stream -->
+        <div class="cs-narrative">
+          
+          <!-- Section 1 -->
+          <section id="context" class="narrative-block reveal-el">
+            <h2>The Challenge</h2>
+            <p>Public transportation should be one of the easiest ways to travel, but for many commuters it becomes frustrating before the journey even begins.
+
+People often rely on multiple apps to plan routes, book last-mile transportation, track arrivals, and complete payments. Constantly switching between different services creates unnecessary friction and makes travelling feel more stressful than it should.
+
+Our goal was simple:
+
+Design one connected experience that helps users move through their entire journey with confidence.</p>
+            
+            <h3>Understanding the Users</h3>
+            <p>Before exploring solutions, I wanted to understand how people actually travel every day.
+
+I conducted interviews, contextual observations, and journey mapping sessions with commuters and transport operators to identify where the biggest frustrations occurred 
+
+with
+
+25 Daily Commuters
+10 Transport Operators
+
+Instead of focusing only on the app, I studied the complete journey from leaving home until reaching the destination.
+
+This helped uncover pain points that weren't immediately obvious during interviews alone.</p>
+            
+            <div class="insight-matrix-row">
+              <div class="insight-node-card">
+                <h4>1. Paying across different transport modes</h4>
+                <p>Commuters frequently switched between digital payments, physical tickets, and cash depending on the transport they were using. This interrupted the travel experience and created unnecessary confusion.</p>
+              </div>
+              <div class="insight-node-card">
+                <h4>2. Families needed better ways to manage travel expenses.</h4>
+                <p>Parents wanted an easy way to allocate travel money to their children while still keeping track of how the balance was being used.</p>
+              </div>
+            </div>
+
+            <!-- EMO WEB SECTION START -->
+            <h3>Emotional Mapping</h3>
+            <p>Before jumping into solutions, I wanted to understand how people actually felt during their journey. By mapping the emotions, motivations, and frustrations of both commuters and drivers, I was able to identify the moments where design could have the greatest impact.</p>
+
+            <div class="emo-web-wrapper">
+              
+              <!-- Persona 1: Transport Lover -->
+              <div class="emo-persona-section">
+                <div class="emo-persona-header">
+                  <h4>Transport Lover (Commuter)</h4>
+                </div>
+                <div class="emo-grid-2x2">
+                  
+                  <!-- Top Left: Joy -->
+                  <div class="emo-quadrant joy">
+                    <span class="emo-quad-title">Joy</span>
+                    <ul class="emo-list">
+                      <li>Love for travel</li>
+                      <li>Public Transport with friend</li>
+                      <li>Ticketing and easy of access</li>
+                    </ul>
+                  </div>
+
+                  <!-- Top Right: Interest -->
+                  <div class="emo-quadrant interest">
+                    <span class="emo-quad-title">Interest</span>
+                    <ul class="emo-list">
+                      <li>Economic friendly</li>
+                      <li>Convenient for multiple trips</li>
+                      <li>Easy to use</li>
+                    </ul>
+                  </div>
+
+                  <!-- Bottom Left: Hope -->
+                  <div class="emo-quadrant hope">
+                    <span class="emo-quad-title">Hope</span>
+                    <ul class="emo-list">
+                      <li>Reduce crowd in busy route</li>
+                      <li>Smooth Journey</li>
+                      <li>To reduce crowd and reach place</li>
+                    </ul>
+                  </div>
+
+                  <!-- Bottom Right: Frustration -->
+                  <div class="emo-quadrant frustration">
+                    <span class="emo-quad-title">Frustration</span>
+                    <ul class="emo-list">
+                      <li>Have to walk long distance to bus stop</li>
+                      <li>Hard to carry the exact amount for ticket</li>
+                      <li>Hard to board and travel</li>
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Persona 2: Passionate Driver -->
+              <div class="emo-persona-section">
+                <div class="emo-persona-header">
+                  <h4>Passionate Driver (Operator)</h4>
+                </div>
+                <div class="emo-grid-2x2">
+                  
+                  <!-- Top Left: Sad -->
+                  <div class="emo-quadrant sad">
+                    <span class="emo-quad-title">Sad</span>
+                    <ul class="emo-list">
+                      <li>Less Profit</li>
+                      <li>Satisfying family needs is difficult</li>
+                      <li>Couldn't afford anything he wants</li>
+                    </ul>
+                  </div>
+
+                  <!-- Top Right: Happy -->
+                  <div class="emo-quadrant happy">
+                    <span class="emo-quad-title">Happy</span>
+                    <ul class="emo-list">
+                      <li>He feels liberated and independent</li>
+                      <li>This job brings respect</li>
+                      <li>Family Support</li>
+                    </ul>
+                  </div>
+
+                  <!-- Bottom Left: Willing -->
+                  <div class="emo-quadrant willing">
+                    <span class="emo-quad-title">Willing</span>
+                    <ul class="emo-list">
+                      <li>He has positive influence in life</li>
+                      <li>Willing to save for future</li>
+                      <li>He is ready to face anything</li>
+                    </ul>
+                  </div>
+
+                  <!-- Bottom Right: Overwhelmed -->
+                  <div class="emo-quadrant overwhelmed">
+                    <span class="emo-quad-title">Overwhelmed</span>
+                    <ul class="emo-list">
+                      <li>Paying bills is getting harder</li>
+                      <li>Environment is supportive and friendly</li>
+                      <li>Private Owners treat him while giving tips</li>
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+            <!-- EMO WEB SECTION END -->
+
+          </section>
+
+          <!-- Section 2 -->
+          <section id="architecture" class="narrative-block reveal-el">
+            <h2>Designing the Solution</h2>
+            <p>To solve the challenges identified during research, I designed a connected platform for both commuters and transport operators. It supports real-time route planning while also providing offline access to essential features, making the experience more dependable across different travel scenarios.</p>
+            
+            <h3>For commuters</h3>
+            <p>For commuters, every second matters. The experience was designed to minimise unnecessary taps and make key information easy to access. Whether planning a route, tracking a journey, or making a payment, every interaction was built to feel quick, intuitive, and dependable—even when internet connectivity is unreliable.</p>
+            
+            <div class="process-pipeline-wrap">
+              <ul class="pipeline-list">
+                <li class="pipeline-step">Authentication & Profile Initiation
+                  <ul class="pipeline-sub-steps">
+                    <li>Sign up &rarr; Setup Secure Core Profile &rarr; Core Interface Initiation.</li>
+                  </ul>
+                </li>
+                <li class="pipeline-step">Online System Execution
+                  <ul class="pipeline-sub-steps">
+                    <li>Ping real-time positioning & evaluate immediate parameters.</li>
+                    <li>Compute and aggregate appropriate cross-modal travel combinations.</li>
+                    <li>Route selection intent: 'Immediate Routing' or 'Scheduled Allocation'.</li>
+                    <li>System Handshake: Driver Validation &rarr; Route Active &rarr; Transit Complete.</li>
+                  </ul>
+                </li>
+                <li class="pipeline-step">Offline Resilience Mode
+                  <ul class="pipeline-sub-steps">
+                    <li>Fallback query to local system files for static timetable tracking.</li>
+                    <li>Hardware Layer: Physical near-field hardware execution at access gates.</li>
+                    <li>Automatic dynamic billing synchronization on next connected terminal node.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <h3>The Driver Model (Supply Side)</h3>
+            <p>The operator dispatch layout focused purely on reducing user decision fatigue during manual operation, organizing components to emphasize strict binary actions.</p>
+            
+            <div class="process-pipeline-wrap">
+              <ul class="pipeline-list">
+                <li class="pipeline-step">Operator Verification & Status
+                  <ul class="pipeline-sub-steps">
+                    <li>Secure Verification Entry &rarr; Set Profile Status &rarr; System Active Monitor.</li>
+                  </ul>
+                </li>
+                <li class="pipeline-step">Dispatch Logic Pipeline
+                  <ul class="pipeline-sub-steps">
+                    <li>Dynamic Queue processing: Populate 'Available Requests' metrics.</li>
+                    <li>Binary Logic Switch: Interaction swipe gesture to accept or bypass request.</li>
+                    <li>Fulfillment: Client Position Tracking &rarr; Check-In &rarr; Route Complete &rarr; Auto-Ledger Balancing.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Section 3 -->
+          <section id="design" class="narrative-block reveal-el">
+            <h2>The Experience</h2>
+            <p>After defining the user experience, I focused on building a design system that would keep the product consistent as it grew. From typography and colour palettes to reusable components and spacing guidelines, every element was designed to create a familiar, intuitive experience while making future updates faster and easier.</p>
+            
+            <h3>Design System Foundations</h3>
+            <p>Every visual decision was made to support commuters who are often on the move. Clear typography, a restrained colour palette, and a consistent layout work together to make information easy to scan and interactions effortless—even in busy travel environments.</p>
+
+            <div class="token-showcase-grid">
+              <!-- Typography Token -->
+              <div class="token-card">
+                <h4>Typography</h4>
+                <div class="token-font-mega">Aa</div>
+                <p style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--text-primary);">Aptos</p>
+                <div class="token-font-weights">
+                  <span style="font-weight: 400;">Regular (400)</span>
+                  <span style="font-weight: 500;">Medium (500)</span>
+                  <span style="font-weight: 700;">Bold (700)</span>
+                </div>
+              </div>
+
+              <!-- Color Palette Token -->
+              <div class="token-card">
+                <h4>Color Palette</h4>
+                <div class="token-swatch-row">
+                  <div class="token-swatch" style="background-color: #a0d94a;"></div>
+                  <div class="token-meta-desc">
+                    <p>Primary Text</p>
+                    <span>#A0D94A</span>
+                  </div>
+                </div>
+                <div class="token-swatch-row">
+                  <div class="token-swatch" style="background-color: #404040;"></div>
+                  <div class="token-meta-desc">
+                    <p>Secondary</p>
+                    <span>#404040</span>
+                  </div>
+                </div>
+                <div class="token-swatch-row">
+                  <div class="token-swatch" style="background-color: #eff0f0;"></div>
+                  <div class="token-meta-desc">
+                    <p>Light Slate</p>
+                    <span>#EFF0F0</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Grid Metric Token -->
+              <div class="token-card">
+                <h4>Grid Framework</h4>
+                <ul class="token-spec-table">
+                  <li>Viewport <span>428 x 926 px</span></li>
+                  <li>Columns <span>4 Column</span></li>
+                  <li>Type <span>Centered</span></li>
+                  <li>Gutter <span>12px</span></li>
+                  <li>Column <span>81px</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <h3>Shared Wallet</h3>
+            <p>One of the most meaningful insights from the research was that commuting isn't always an individual experience. Families often travel together or support one another financially. This led to the Shared Wallet feature, where a primary user can securely allocate travel funds to family members, monitor usage, and manage expenses from a single account.</p>
+          </section>
+
+          <!-- Section 4 -->
+          <section id="outcomes" class="narrative-block reveal-el">
+            <h2>The result</h2>
+            <p>One of the most meaningful insights from the research was that commuting isn't always an individual experience. Families often travel together or support one another financially. This led to the Shared Wallet feature, where a primary user can securely allocate travel funds to family members, monitor usage, and manage expenses from a single account.</p>
+            
+            <div class="insight-matrix-row">
+              <div class="insight-node-card outcome-node-card">
+                <div class="outcome-metrics-mega">94%</div>
+                <p class="outcome-metrics-lbl">Task Success Metric Completion</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Measured across multi-modal transit allocations.</p>
+              </div>
+              <div class="insight-node-card outcome-node-card">
+                <div class="outcome-metrics-mega">+42%</div>
+                <p class="outcome-metrics-lbl">Ecosystem Balance Volume</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Observed following launch of shared profile infrastructure.</p>
+              </div>
+            </div>
+
+            <h3>What I Learned</h3>
+            <p>This project reinforced the importance of designing for real-world conditions, not just ideal scenarios. Supporting offline journeys made the experience more dependable, but it also highlighted the operational challenges of maintaining additional hardware.
+
+As a next step, I would explore NFC-enabled mobile wallets and other native device capabilities to simplify the experience while reducing infrastructure costs.</p>
+          </section>
+
+          <!-- CTA Section -->
+          <div class="cs-cta-container reveal-el">
+            <a href="https://www.behance.net/gallery/160373445/Hippi-Go-UX-UI-Case-Study" target="_blank" rel="noopener noreferrer" class="btn-cta">
+              See full case study on Behance
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </a>
+          </div>
+          
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer Architecture -->
+    <footer class="reveal-el">
+      <h2 class="footer-title">Have an idea? I'd love to hear it.</h2>
+      <a href="mailto:dakshinragav849@gmail.com" class="footer-email">dakshinragav849@gmail.com</a>
+      
+      <!-- Cleaned up Text Links -->
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/dakshinragav/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bfir8WmvRTlG7xDy%2BXU6ANQ%3D%3D" target="_blank" class="text-link">LinkedIn</a>
+        <a href="https://www.behance.net/dakshinragav" target="_blank" class="text-link">Behance</a>
+        <a href="tel:+917667642718" class="text-link">Contact</a>
+      </div>
+
+      <p class="footer-meta">© 2026.Dakshin Ragav</p>
+    </footer>
+  </div>
+
+  <!-- Unified Interaction Engine Script -->
+  <script>
+    // 1. Dynamic Sticky Navigation Border
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // 2. High-Performance Intersection Observer for Scroll Animations
+    const revealElements = document.querySelectorAll('.reveal-el');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: "0px 0px -50px 0px"
+    });
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // 3. Technical Index Navigation Active Scroll Highlighting Loop
+    const sections = document.querySelectorAll('.narrative-block');
+    const indexLinks = document.querySelectorAll('.index-trigger');
+    
+    window.addEventListener('scroll', () => {
+      let activeSectionId = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= (sectionTop - 240)) {
+          activeSectionId = section.getAttribute('id');
+        }
+      });
+
+      indexLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(activeSectionId)) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // 4. Smooth Anchor Target Scroll Physics Execution
+    indexLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetedHash = this.getAttribute('href');
+        const targetedNode = document.querySelector(targetedHash);
+        if (targetedNode) {
+          targetedNode.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
