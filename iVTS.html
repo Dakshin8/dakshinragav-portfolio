@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IVTS Case Study | NTCPWC</title>
+  
+  <style>
+    /* --- CSS Custom Variables --- */
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-accent-light: #f1f5f9; 
+      --text-primary: #0f172a;    
+      --text-secondary: #475569;  
+      --text-muted: #94a3b8;      
+      --accent: #0284c7;          
+      --card-border: rgba(15, 23, 42, 0.08);
+      --nav-bg: rgba(248, 250, 252, 0.85);
+      --font-stack: 'Aptos', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* --- Reset & Base Styles --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 7rem;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-stack);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 0 2rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* --- Top Page Loader Animation --- */
+    #top-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--text-primary), transparent);
+      z-index: 9999;
+      transform: translateX(-100%);
+      animation: loadPage 1.4s cubic-bezier(0.65, 0.05, 0.36, 1) forwards;
+    }
+
+    @keyframes loadPage {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(0%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* --- Scroll-Driven Reveal --- */
+    .reveal-el {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-el.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- Navigation --- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 1.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid transparent;
+      transition: padding 0.3s ease, border-color 0.3s ease;
+    }
+
+    header.scrolled {
+      padding: 1rem 0;
+      border-color: var(--card-border);
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .logo-img {
+      height: 60px;
+      width: auto;
+      object-fit: contain;
+      transition: opacity 0.3s ease;
+    }
+    
+    .logo:hover .logo-img {
+      opacity: 0.7;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--text-primary);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .btn-back {
+      background-color: var(--text-primary);
+      color: var(--bg-primary);
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+    }
+
+    .btn-back:hover {
+      background-color: var(--text-secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.15);
+    }
+
+    /* --- Case Study Hero Layout --- */
+    .cs-hero {
+      padding: 6rem 0 3rem 0;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cs-eyebrow {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-primary);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      background: var(--bg-accent-light);
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+    }
+
+    .cs-title {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.8rem;
+    }
+
+    .cs-title em {
+      font-style: normal;
+      color: var(--accent);
+      border-bottom: 3px solid var(--accent);
+    }
+
+    /* --- Project Metadata Matrix --- */
+    .cs-meta-matrix {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 3rem;
+      margin-bottom: 4rem;
+    }
+
+    .meta-block {
+      text-align: center;
+    }
+
+    .meta-block h4 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .meta-block p {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* --- Immersive Case Video --- */
+    .cs-main-display {
+      width: 100%;
+      height: 630px;
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+      overflow: hidden;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    .cs-main-display video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .social-badge {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(8px);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 10;
+    }
+
+    /* --- Simple Write-up Section --- */
+    .cs-simple-writeup {
+      max-width: 800px;
+      margin: 0 auto 6rem auto;
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .cs-simple-writeup h2 {
+      font-size: 2rem;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .cs-simple-writeup p {
+      margin-bottom: 1.5rem;
+    }
+
+    /* --- Footer --- */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 6rem 0 4rem 0;
+      text-align: center;
+    }
+
+    .footer-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-email {
+      font-size: 1.35rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-block;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition);
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-email:hover {
+      border-color: var(--text-primary);
+      color: var(--text-secondary);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .text-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .text-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background-color: var(--text-primary);
+      transition: var(--transition);
+    }
+
+    .text-link:hover::after {
+      width: 100%;
+    }
+
+    .text-link:hover {
+      color: var(--text-primary);
+    }
+
+    .footer-meta {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      .cs-hero {
+        padding-top: 4rem;
+        text-align: left;
+      }
+      .cs-meta-matrix {
+        justify-content: flex-start;
+        gap: 1.5rem;
+      }
+      .meta-block {
+        text-align: left;
+      }
+      .cs-main-display {
+        height: 320px;
+        margin-bottom: 3.5rem;
+      }
+      body {
+        padding: 0 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Animated Loader Line -->
+  <div id="top-loader"></div>
+
+  <div class="container">
+    <!-- Header Architecture -->
+    <header>
+      <a href="index.html" class="logo">
+        <img src="Logo-02.svg" alt="Dakshin Ragav Logo" class="logo-img">
+      </a>
+      <div class="nav-actions">
+        <a href="aboutme.html" class="nav-link">About me</a>
+        <a href="index.html#work" class="nav-link">Work</a>
+        <a href="index.html#experience" class="nav-link">Experience</a>
+        
+        <a href="index.html#work" class="btn-back">
+          &larr; Back to Work
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <!-- Case Study Hero -->
+      <section class="cs-hero reveal-el">
+        <div class="cs-eyebrow">Marine System Case Study • NTCPWC</div>
+        <h1 class="cs-title">
+         IVTS: Next-Generation <em style="color: var(--accent); font-style: normal;">Vessel Traffic Management</em>
+        </h1>
+      </section>
+
+      <!-- Project Metadata -->
+      <section class="cs-meta-matrix reveal-el">
+        <div class="meta-block">
+          <h4>Client / Owner</h4>
+          <p>NTCPWC</p>
+        </div>
+        <div class="meta-block">
+          <h4>Role</h4>
+          <p>Product Lead</p>
+        </div>
+        <div class="meta-block">
+          <h4>Platform</h4>
+          <p>Web Command Center</p>
+        </div>
+      </section>
+
+      <!-- Main Overview Hero Display Video -->
+      <div class="cs-main-display reveal-el">
+        <!-- Callout badge highlighting the viral/social status -->
+
+        <!-- Auto-playing HTML5 Video element -->
+        <video autoplay loop muted playsinline>
+          <source src="iVTS - Demo Video B (1).mp4" type="video/mp4">
+          <!-- Fallback image if video fails to load -->
+          <img src="ivts-fallback.jpg" alt="IVTS Vessel Traffic Management System">
+        </video>
+      </div>
+
+      <!-- Simple Write-up Section -->
+<section class="cs-simple-writeup reveal-el">
+  <h2>About the Project</h2>
+
+  <p>
+    The <strong>Indigenous Vessel Traffic System (IVTS)</strong> is a next-generation maritime traffic management platform developed at <strong>NTCPWC, IIT Madras</strong>. Built as an indigenous alternative to costly legacy systems, it unifies radar, AIS, weather, and surveillance data into a single interface, enabling safer and more efficient port operations.
+  </p>
+
+  <p>
+    As the <strong>Product Lead</strong>, I transformed complex operator workflows into an intuitive experience that reduced cognitive overload and helped VTS operators make faster, more informed decisions in high-pressure environments. By simplifying navigation, prioritizing critical alerts, and improving information hierarchy, the platform delivered an estimated <strong>60% improvement in operational efficiency</strong> across key workflows.
+  </p>
+
+  <p>
+    Today, IVTS is deployed across multiple major Indian ports, helping reduce vessel turnaround times, strengthen coastal safety, and modernize India's maritime infrastructure. The platform has also received widespread recognition, with demonstrations showcased during high-profile government visits and gaining significant visibility as a benchmark for India's indigenous maritime innovation.
+  </p>
+</section>
+    </main>
+
+    <!-- Footer Architecture -->
+    <footer class="reveal-el">
+      <h2 class="footer-title">Have an idea? I'd love to hear it.</h2>
+      <a href="mailto:dakshinragav849@gmail.com" class="footer-email">dakshinragav849@gmail.com</a>
+      
+      <!-- Cleaned up Text Links -->
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/dakshinragav/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bfir8WmvRTlG7xDy%2BXU6ANQ%3D%3D" target="_blank" class="text-link">LinkedIn</a>
+        <a href="https://www.behance.net/dakshinragav" target="_blank" class="text-link">Behance</a>
+        <a href="tel:+917667642718" class="text-link">Contact</a>
+      </div>
+
+      <p class="footer-meta">© 2026.Dakshin Ragav</p>
+    </footer>
+  </div>
+
+  <!-- Unified Interaction Engine Script -->
+  <script>
+    // 1. Dynamic Sticky Navigation Border
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // 2. High-Performance Intersection Observer for Scroll Animations
+    const revealElements = document.querySelectorAll('.reveal-el');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: "0px 0px -50px 0px"
+    });
+    revealElements.forEach(el => revealObserver.observe(el));
+  </script>
+</body>
+</html>
