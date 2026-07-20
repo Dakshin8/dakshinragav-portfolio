@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LabFlow Case Study | Alex.Design</title>
+  
+  <style>
+    /* --- CSS Custom Variables --- */
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-accent-light: #f1f5f9; 
+      --text-primary: #0f172a;    
+      --text-secondary: #475569;  
+      --text-muted: #94a3b8;      
+      --accent: #0f172a;          
+      --card-border: rgba(15, 23, 42, 0.08);
+      --nav-bg: rgba(248, 250, 252, 0.85);
+
+      --font-stack: 'Aptos', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* --- Reset & Base Styles --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 7rem;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-stack);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 0 2rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* --- Top Page Loader Animation --- */
+    #top-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--text-primary), transparent);
+      z-index: 9999;
+      transform: translateX(-100%);
+      animation: loadPage 1.4s cubic-bezier(0.65, 0.05, 0.36, 1) forwards;
+    }
+
+    @keyframes loadPage {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(0%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* --- Scroll-Driven Reveal --- */
+    .reveal-el {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-el.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- Navigation --- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 1.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid transparent;
+      transition: padding 0.3s ease, border-color 0.3s ease;
+    }
+
+    header.scrolled {
+      padding: 1rem 0;
+      border-color: var(--card-border);
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo-img {
+      height: 60px;
+      width: auto;
+      object-fit: contain;
+      transition: opacity 0.3s ease;
+    }
+    
+    .logo:hover .logo-img {
+      opacity: 0.7;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--text-primary);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .btn-back {
+      background-color: var(--text-primary);
+      color: var(--bg-primary);
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+    }
+
+    .btn-back:hover {
+      background-color: var(--text-secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.15);
+    }
+
+    /* --- Case Study Hero Layout --- */
+    .cs-hero {
+      padding: 6rem 0 3rem 0;
+    }
+
+    .cs-hero-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .cs-hero-text {
+      flex: 1;
+      max-width: 720px;
+    }
+
+    .cs-hero-visual {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .cs-hero-side-logo {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .cs-eyebrow {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-primary);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      background: var(--bg-accent-light);
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+    }
+
+    .cs-title {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.8rem;
+    }
+
+    .cs-title em {
+      font-style: normal;
+      color: #2563eb; 
+      border-bottom: 3px solid #2563eb;
+    }
+
+    .cs-desc {
+      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+      color: var(--text-secondary);
+      font-weight: 400;
+      margin-bottom: 3rem;
+    }
+
+    /* --- Project Metadata Matrix --- */
+    .cs-meta-matrix {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      padding: 2.2rem;
+      background-color: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+      margin-bottom: 4rem;
+    }
+
+    .meta-block h4 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .meta-block p {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .meta-tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .meta-mini-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      background: var(--bg-accent-light);
+      color: var(--text-primary);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    /* --- Immersive Case Image --- */
+    .cs-main-display {
+      width: 100%;
+      height: 480px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+      overflow: hidden;
+      margin-bottom: 5rem;
+    }
+
+    .cs-main-display img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* --- Complex Split Layout Architecture --- */
+    .cs-split-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* Sticky Technical Index Navigation */
+    .cs-sticky-index {
+      position: sticky;
+      top: 10rem;
+    }
+
+    .index-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .index-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .index-trigger {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .index-trigger::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 0;
+      background-color: var(--text-primary);
+      transition: var(--transition);
+    }
+
+    .index-trigger:hover, 
+    .index-trigger.active {
+      color: var(--text-primary);
+    }
+
+    .index-trigger:hover::before, 
+    .index-trigger.active::before {
+      height: 16px;
+    }
+
+    /* --- Layout Narrative Stream --- */
+    .cs-narrative {
+      max-width: 760px;
+    }
+
+    .narrative-block {
+      margin-bottom: 6rem;
+      scroll-margin-top: 9rem;
+    }
+
+    .narrative-block h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .narrative-block p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.65;
+    }
+
+    .narrative-block h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 3rem 0 1.25rem 0;
+      letter-spacing: -0.01em;
+    }
+
+    /* Premium Data Insight Layout Cards */
+    .insight-matrix-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+    }
+
+    .insight-node-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--card-border);
+      padding: 2.2rem;
+      border-radius: 20px;
+      transition: var(--transition);
+    }
+
+    .insight-node-card:hover {
+      border-color: var(--text-primary);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
+    }
+
+    .insight-node-card h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .insight-node-card p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+
+    /* Minimal Outcomes Cards */
+    .outcome-node-card {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .outcome-metrics-mega {
+      font-size: 3.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.04em;
+    }
+
+    .outcome-metrics-lbl {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    /* --- System Structural Process Flows --- */
+    .process-pipeline-wrap {
+      background-color: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin: 2rem 0;
+    }
+
+    .pipeline-list {
+      list-style-type: none;
+    }
+
+    .pipeline-step {
+      position: relative;
+      padding-left: 2.2rem;
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .pipeline-step:last-child {
+      margin-bottom: 0;
+    }
+
+    .pipeline-step::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.4rem;
+      width: 8px;
+      height: 8px;
+      background-color: var(--text-primary);
+      border-radius: 50%;
+    }
+
+    .pipeline-step::after {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 1.3rem;
+      bottom: -1.5rem;
+      width: 1px;
+      background-color: var(--card-border);
+    }
+
+    .pipeline-step:last-child::after {
+      display: none;
+    }
+
+    .pipeline-sub-steps {
+      list-style-type: none;
+      padding-left: 0;
+      margin-top: 0.75rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+
+    .pipeline-sub-steps li {
+      position: relative;
+      padding-left: 1.2rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .pipeline-sub-steps li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+    }
+
+    /* --- System Design Token Showcase --- */
+    .token-showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0 3.5rem 0;
+    }
+
+    .token-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: var(--transition);
+    }
+
+    .token-card:hover {
+      border-color: var(--text-primary);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
+    }
+
+    .token-card h4 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+
+    .token-swatch-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .token-swatch-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .token-swatch {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .token-meta-desc p {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .token-meta-desc span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: monospace;
+      background: var(--bg-primary);
+      padding: 0.15rem 0.3rem;
+      border-radius: 4px;
+    }
+
+    .token-font-mega {
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .token-font-weights {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .token-spec-table {
+      list-style: none;
+    }
+
+    .token-spec-table li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.6rem 0;
+      color: var(--text-secondary);
+    }
+
+    .token-spec-table li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .token-spec-table span {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* --- Case Study CTA --- */
+    .cs-cta-container {
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--card-border);
+      text-align: left;
+    }
+
+    .btn-cta {
+      background-color: var(--text-primary);
+      color: var(--bg-primary);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.1);
+    }
+
+    .btn-cta:hover {
+      background-color: var(--text-secondary);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(15, 23, 42, 0.15);
+      color: var(--bg-primary);
+    }
+
+    .btn-cta svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* --- Footer --- */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 6rem 0 4rem 0;
+      text-align: center;
+    }
+
+    .footer-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-email {
+      font-size: 1.35rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-block;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition);
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-email:hover {
+      border-color: var(--text-primary);
+      color: var(--text-secondary);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .text-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .text-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background-color: var(--text-primary);
+      transition: var(--transition);
+    }
+
+    .text-link:hover::after {
+      width: 100%;
+    }
+
+    .text-link:hover {
+      color: var(--text-primary);
+    }
+
+    .footer-meta {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* --- Technical Responsive Framework Breakpoints --- */
+    @media (max-width: 992px) {
+      .cs-split-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .cs-sticky-index {
+        display: none; 
+      }
+      .cs-main-display {
+        height: 320px;
+        margin-bottom: 3.5rem;
+      }
+      .insight-matrix-row {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      body {
+        padding: 0 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .cs-hero {
+        padding-top: 4rem;
+      }
+      .cs-hero-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+      }
+      .cs-hero-visual {
+        max-width: 180px; 
+      }
+      .cs-meta-matrix {
+        padding: 1.5rem;
+        gap: 1.5rem;
+      }
+      .process-pipeline-wrap {
+        padding: 1.5rem;
+      }
+      .cs-cta-container {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Animated Loader Line -->
+  <div id="top-loader"></div>
+
+  <div class="container">
+    <!-- Header Architecture -->
+    <header>
+      <a href="index.html" class="logo">
+        <img src="Logo-02.svg" alt="Dakshin Ragav Logo" class="logo-img">
+      </a>
+      <div class="nav-actions">
+        <a href="aboutme.html" class="nav-link">About me</a>
+        <a href="index.html#work" class="nav-link">Work</a>
+        <a href="index.html#experience" class="nav-link">Experience</a>
+        
+        <a href="index.html#work" class="btn-back">
+          &larr; Back to Work
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <!-- Case Study Hero -->
+      <section class="cs-hero reveal-el">
+        <div class="cs-hero-content">
+          <div class="cs-hero-text">
+            <div class="cs-eyebrow">Enterprise Web App Case Study</div>
+            <h1 class="cs-title">
+             LabFlow: Making Diagnostics  <em style="color: #2563eb; font-style: normal;">Faster and More Efficient</em>
+            </h1>
+            <p class="cs-desc">
+              I designed an intuitive operational platform to replace messy spreadsheets and stressful word-of-mouth handoffs. It seamlessly connects sample collection, clinical reviews, and shift changes, allowing medical staff to focus on patients rather than fighting their software.<br><br>Feel free to explore the interactive prototype at the bottom of the page.
+            </p>
+          </div>
+          <div class="cs-hero-visual">
+            <img src="Labflow-logo-01.png" alt="LabFlow Brand Logo" class="cs-hero-side-logo">
+          </div>
+        </div>
+      </section>
+
+      <!-- Project Metadata Matrix Area -->
+      <section class="cs-meta-matrix reveal-el">
+        <div class="meta-block">
+          <h4>Role</h4>
+          <p>Product Designer</p>
+          <div class="meta-tag-group">
+            <span class="meta-mini-tag">Clinical UI</span>
+            <span class="meta-mini-tag">Systems</span>
+          </div>
+        </div>
+        <div class="meta-block">
+          <h4>Platform</h4>
+          <p>Web Application</p>
+        </div>
+        <div class="meta-block">
+          <h4>Timeline</h4>
+          <p>2 Weeks</p>
+        </div>
+        <div class="meta-block">
+          <h4>Core Focus</h4>
+          <p>UX Strategy & Architecture</p>
+        </div>
+      </section>
+
+      <!-- Main Overview Hero Display Asset -->
+      <div class="cs-main-display reveal-el">
+        <img src="Labflow(in).jpg" alt="LabFlow Dashboard Architecture Asset">
+      </div>
+
+      <!-- Main Layout Technical Split -->
+      <div class="cs-split-grid">
+        
+        <!-- Sticky Sidebar System Navigation Index -->
+        <aside class="cs-sticky-index reveal-el">
+          <div class="index-label">Case Analysis</div>
+          <div class="index-links">
+            <a href="#challenge" class="index-trigger active">The Challenge</a>
+            <a href="#solution" class="index-trigger">Designing the Solution</a>
+            <a href="#experience" class="index-trigger">The Experience</a>
+            <a href="#result" class="index-trigger">The Result</a>
+          </div>
+        </aside>
+
+        <!-- Main Narrative Pipeline Stream -->
+        <div class="cs-narrative">
+          
+          <!-- Section 1 -->
+          <section id="challenge" class="narrative-block reveal-el">
+            <h2>The Challenge</h2>
+            <p>Step inside Micro Laboratory in Coimbatore during a peak shift, and the tension is palpable. I didn't just see a lab processing thousands of samples; I saw people working on overdrive. I watched stressed technicians frantically juggling scattered spreadsheets, making hurried phone calls, and relying entirely on their memory to ensure nothing slipped through the cracks. It became clear that urgent tasks weren't just getting lost in rows of data—they were burning the staff out.</p>
+            
+            <h3>Walking in Their Shoes</h3>
+            <p>To truly grasp the friction they faced every day, I shadowed the floor staff. Watching the real-time interactions between anxious patients and overwhelmed technicians shifted my entire perspective. The bottlenecks weren't just technical; they were deeply human. Here's what stood out:</p>
+            
+            <div class="insight-matrix-row">
+              <div class="insight-node-card">
+                <h4>1. The Chaos of Parallel Work</h4>
+                <p>Three collection stations operated simultaneously, but staff were constantly tripping over each other in the system. The new platform couldn't just store data; it had to act as a silent coordinator, allowing multiple technicians to log samples concurrently without the fear of overwriting someone else's hard work.</p>
+              </div>
+              <div class="insight-node-card">
+                <h4>2. The Anxiety of the Unknown</h4>
+                <p>The biggest source of stress was a simple question: "Where is this sample right now?" The goal wasn't just a prettier spreadsheet. It was to build a transparent workspace where anyone could instantly see a sample's journey, bringing peace of mind to the team and the patients waiting for results.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 2 -->
+          <section id="solution" class="narrative-block reveal-el">
+            <h2>Designing the Solution</h2>
+            <p>When a patient's health is on the line, clinical environments are unforgiving. A critical sample might fail before a doctor even has time to review it. But I also learned that bombarding staff with constant red alerts doesn't help—it just causes them to tune everything out. To design a tool that truly supported these professionals, I let four human-centric constraints guide my architecture.</p>
+            
+            <div class="insight-matrix-row">
+              <div class="insight-node-card">
+                <h4>1. Curing Alert Fatigue</h4>
+                <p><strong style="color: var(--text-primary);">What I did:</strong> I created a calm, focused Overview screen that only highlights what desperately needs attention <em>right now</em> (like a sudden quality control failure).<br><br><strong style="color: var(--text-primary);">What I avoided:</strong> Blinding the staff with a dashboard full of generic charts and flashing lights that spike anxiety without offering a clear next step.</p>
+              </div>
+              <div class="insight-node-card">
+                <h4>2. Respecting Their Time</h4>
+                <p><strong style="color: var(--text-primary);">What I did:</strong> I separated the 'big picture' tracking from the heavy clinical details. The main workflow feels lightweight, allowing doctors to make quick, confident decisions.<br><br><strong style="color: var(--text-primary);">What I avoided:</strong> Forcing exhausted clinicians to dig through dense, cluttered patient histories just to find a single metric.</p>
+              </div>
+            </div>
+
+            <div class="insight-matrix-row">
+              <div class="insight-node-card">
+                <h4>3. The 'Pass the Baton' Moment</h4>
+                <p><strong style="color: var(--text-primary);">What I did:</strong> Shift changes were notoriously messy. I designed a dedicated 'Shift Handoff' feature that acts as a clean, conversational summary—letting the incoming doctor know exactly what to watch out for.<br><br><strong style="color: var(--text-primary);">What I avoided:</strong> Leaving behind a cryptic activity log that forces the next person to play detective before they can even start their shift.</p>
+              </div>
+              <div class="insight-node-card">
+                <h4>4. Building Trust in AI</h4>
+                <p><strong style="color: var(--text-primary);">What I did:</strong> Doctors are rightfully skeptical of machines making medical calls. Instead of having AI override them, the system offers gentle, helpful recommendations. The clinician always remains the hero, retaining full control over the final diagnosis.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 3 -->
+          <section id="experience" class="narrative-block reveal-el">
+            <h2>The Experience</h2>
+            <p>A platform is only as good as the people who use it. For LabFlow to succeed, it had to seamlessly adapt to three very distinct minds: the multitasking lab technician, the hyper-focused reviewing clinician, and the incoming doctor taking the reins. My solution was a unified system that naturally molds itself to whoever is logging in, giving them exactly what they need and nothing they don't.</p>
+            
+            <h3>Status Colors & Typography</h3>
+            <p>I was very intentional with color choices. Instead of using it just to make things look nice, I reserved it entirely to communicate status and urgency. In a screen packed with data, this ensures that the most critical alerts instantly catch the eye.</p>
+
+            <div class="token-showcase-grid">
+              <!-- Typography Token -->
+              <div class="token-card">
+                <h4>Typography</h4>
+                <div class="token-font-mega">Aa</div>
+                <p style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--text-primary);">Aptos</p>
+                <div class="token-font-weights">
+                  <span style="font-weight: 400;">Regular (400)</span>
+                  <span style="font-weight: 500;">Medium (500)</span>
+                  <span style="font-weight: 700;">Bold (700)</span>
+                </div>
+              </div>
+
+              <!-- Color Palette Token -->
+              <div class="token-card">
+                <h4>Status Colors</h4>
+                <div class="token-swatch-row">
+                  <div class="token-swatch" style="background-color: #ef4444;"></div>
+                  <div class="token-meta-desc">
+                    <p>Critical / Failed</p>
+                    <span>#EF4444</span>
+                  </div>
+                </div>
+                <div class="token-swatch-row">
+                  <div class="token-swatch" style="background-color: #f59e0b;"></div>
+                  <div class="token-meta-desc">
+                    <p>In Progress</p>
+                    <span>#F59E0B</span>
+                  </div>
+                </div>
+                <div class="token-swatch-row">
+                  <div class="token-swatch" style="background-color: #10b981;"></div>
+                  <div class="token-meta-desc">
+                    <p>Completed</p>
+                    <span>#10B981</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Grid Metric Token -->
+              <div class="token-card">
+                <h4>Grid Framework</h4>
+                <ul class="token-spec-table">
+                  <li>Viewport <span>1440 x 900 px</span></li>
+                  <li>Columns <span>12 Column</span></li>
+                  <li>Type <span>Fluid</span></li>
+                  <li>Gutter <span>24px</span></li>
+                  <li>Margin <span>32px</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <h3>Workflows Designed for Human Habits</h3>
+            <p>To fix the operational bottlenecks, I couldn't just force a new software structure onto the lab. I had to map the digital workflows directly to how these professionals physically move and think on the floor.</p>
+            
+            <div class="process-pipeline-wrap">
+              <ul class="pipeline-list">
+                <li class="pipeline-step">The Lab Technician (Intake)
+                  <ul class="pipeline-sub-steps">
+                    <li>Juggling a dozen incoming vials at once, they need a rapid, error-free way to log samples, assign barcodes, and route them without second-guessing.</li>
+                  </ul>
+                </li>
+                <li class="pipeline-step">The Reviewing Clinician (Analysis)
+                  <ul class="pipeline-sub-steps">
+                    <li>Reviewing hundreds of results a day, they need a distraction-free queue to scan batches, easily validate AI suggestions, and swiftly approve cases.</li>
+                  </ul>
+                </li>
+                <li class="pipeline-step">The Incoming Clinician (Handoff)
+                  <ul class="pipeline-sub-steps">
+                    <li>Stepping into a busy shift, they need a seamless transfer of knowledge, acknowledging critical notes so they can hit the ground running with confidence.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Section 4 -->
+          <section id="result" class="narrative-block reveal-el">
+            <h2>The Result</h2>
+            <p>By shifting the focus from 'managing data' to 'supporting people,' LabFlow does more than track samples—it fundamentally changes the emotional temperature of the lab. It takes the heavy mental lifting off the medical staff, eliminating the panic of lost information and the exhaustion of alert fatigue.</p>
+            
+            <div class="insight-matrix-row">
+              <div class="insight-node-card outcome-node-card">
+                <div class="outcome-metrics-mega">100%</div>
+                <p class="outcome-metrics-lbl">Traceability Maintained</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Across all sample lifecycles.</p>
+              </div>
+              <div class="insight-node-card outcome-node-card">
+                <div class="outcome-metrics-mega">0</div>
+                <p class="outcome-metrics-lbl">Passive Alert Fatigue</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Action-driven UI minimizes visual clutter.</p>
+              </div>
+            </div>
+
+            <h3>Experience the Flow</h3>
+            <p>Step into their shoes and explore the operational flow for yourself. The prototype below will walk you through the day-in-the-life of the lab staff—from the high-speed intake of parallel sample logging to the reassuring clarity of a clean shift handoff.</p>
+            
+            <!-- Figma Embed seamlessly fitted into your layout structure -->
+            <div style="margin-top: 2rem; border-radius: 20px; overflow: hidden; border: 1px solid var(--card-border); background: var(--bg-card); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.02); aspect-ratio: 16/9; width: 100%;">
+                <iframe 
+                    style="border: none; width: 100%; height: 100%;" 
+                    src="https://embed.figma.com/proto/FNgGUFnbTySN8pdLeeNuKk/Lab-Flow---UI?node-id=8-69&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=8%3A69&embed-host=share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer Architecture -->
+    <footer class="reveal-el">
+      <h2 class="footer-title">Have an idea? I'd love to hear it.</h2>
+      <a href="mailto:dakshinragav849@gmail.com" class="footer-email">dakshinragav849@gmail.com</a>
+      
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/dakshinragav/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bfir8WmvRTlG7xDy%2BXU6ANQ%3D%3D" target="_blank" class="text-link">LinkedIn</a>
+        <a href="https://www.behance.net/dakshinragav" target="_blank" class="text-link">Behance</a>
+        <a href="tel:+917667642718" class="text-link">Contact</a>
+      </div>
+
+      <p class="footer-meta">© 2026.Dakshin Ragav</p>
+    </footer>
+  </div>
+
+  <!-- Unified Interaction Engine Script -->
+  <script>
+    // 1. Dynamic Sticky Navigation Border
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // 2. High-Performance Intersection Observer for Scroll Animations
+    const revealElements = document.querySelectorAll('.reveal-el');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: "0px 0px -50px 0px"
+    });
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // 3. Technical Index Navigation Active Scroll Highlighting Loop
+    const sections = document.querySelectorAll('.narrative-block');
+    const indexLinks = document.querySelectorAll('.index-trigger');
+    
+    window.addEventListener('scroll', () => {
+      let activeSectionId = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= (sectionTop - 240)) {
+          activeSectionId = section.getAttribute('id');
+        }
+      });
+
+      indexLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(activeSectionId)) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // 4. Smooth Anchor Target Scroll Physics Execution
+    indexLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetedHash = this.getAttribute('href');
+        const targetedNode = document.querySelector(targetedHash);
+        if (targetedNode) {
+          targetedNode.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
