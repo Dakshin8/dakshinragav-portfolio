@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dakshin Ragav - User Experience Designer</title>
+  <title>Dakshin Ragav - User Experience Designer</title>
   <link rel="icon" type="image/png" href="fevicon.png">
   
   <style>
@@ -761,8 +761,18 @@
     }
 
     @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1.25rem;
+        padding: 1.25rem 0;
+      }
+      .nav-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.25rem;
+      }
       .cs-hero {
-        padding-top: 4rem;
+        padding-top: 2rem; 
       }
       .cs-hero-content {
         flex-direction: column;
@@ -781,6 +791,50 @@
       }
       .cs-cta-container {
         text-align: center;
+      }
+      .insight-node-card, .token-card {
+        padding: 1.5rem;
+      }
+      .cs-main-display {
+        height: 240px;
+      }
+      footer {
+        padding: 4rem 0 3rem 0;
+      }
+      .footer-title {
+        font-size: 1.6rem;
+      }
+      .footer-links {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0 1.25rem;
+      }
+      .cs-title {
+        font-size: 2rem;
+      }
+      .nav-actions {
+        gap: 1rem;
+      }
+      .nav-link {
+        font-size: 0.9rem;
+      }
+      .cs-meta-matrix {
+        grid-template-columns: 1fr;
+      }
+      .outcome-metrics-mega {
+        font-size: 2.8rem;
+      }
+      .footer-links {
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+      .footer-email {
+        font-size: 1.15rem;
       }
     }
   </style>
