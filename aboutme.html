@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dakshin Ragav - User Experience Designer</title>
+  <title>Dakshin Ragav - User Experience Designer</title>
   <link rel="icon" type="image/png" href="fevicon.png">
   
   <style>
@@ -242,7 +242,7 @@
     .text-link:hover { color: var(--text-primary); }
     .footer-meta { margin-top: 2rem; font-size: 0.85rem; color: var(--text-muted); }
 
-    /* --- Responsive --- */
+    /* --- Responsive Enhancements --- */
     @media (max-width: 992px) {
       .exp-row { grid-template-columns: 1fr; gap: 1.25rem; padding: 2rem; }
       .exp-meta-side { flex-direction: row; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--card-border); padding-bottom: 1rem; }
@@ -251,13 +251,39 @@
       .asym-grid { grid-template-columns: repeat(2, 1fr); }
       .asym-card { height: 350px; }
     }
+    
     @media (max-width: 768px) {
-      .about-photo-wrap { height: 300px; }
+      body { padding: 0 1.25rem; }
+      
+      /* Stack header gracefully */
+      header { flex-direction: column; gap: 1.25rem; padding: 1.25rem 0; }
+      header.scrolled { padding: 1rem 0; }
+      .nav-actions { flex-wrap: wrap; justify-content: center; gap: 1.25rem; }
+
+      .about-hero { padding: 2rem 0 3rem 0; gap: 2.5rem; }
+      .about-photo-wrap { height: 350px; border-radius: 16px; }
+      .about-title { font-size: 1.8rem; }
+      
+      .section-title { font-size: 1.5rem; }
+      .exp-row { padding: 1.5rem; }
       
       /* Drops to 1 column on mobile to save space */
-      .asym-grid { grid-template-columns: 1fr; gap: 1.5rem; padding-bottom: 0; }
+      .asym-grid { grid-template-columns: 1fr; gap: 1.25rem; padding-bottom: 0; }
       .asym-card:nth-child(even) { transform: none; } /* Disables staggering on mobile */
       .asym-card { height: 320px; }
+      
+      footer { padding: 4rem 0 3rem 0; }
+      .footer-title { font-size: 1.6rem; }
+      .footer-email { font-size: 1.15rem; }
+      .footer-links { gap: 1.5rem; flex-wrap: wrap; }
+    }
+
+    @media (max-width: 480px) {
+      .about-photo-wrap { height: 260px; }
+      .nav-actions { gap: 1rem; }
+      .nav-link { font-size: 0.9rem; }
+      .exp-meta-side { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
+      .footer-links { flex-direction: column; gap: 1.25rem; }
     }
   </style>
 </head>
@@ -360,7 +386,7 @@
         <div class="section-header">
           <h2 class="section-title">Off the Canvas</h2>
           <p class="section-desc">
-             Outside of design, I'm a quiet and detail-oriented person who enjoys travelling, photography, filmmaking, Logo creation and writing stories. These creative interests have taught me to observe people closely, appreciate the finer details, and approach design with empathy and curiosity.
+              Outside of design, I'm a quiet and detail-oriented person who enjoys travelling, photography, filmmaking, Logo creation and writing stories. These creative interests have taught me to observe people closely, appreciate the finer details, and approach design with empathy and curiosity.
         </div>
 
         <!-- Asymmetrical Grid -->
