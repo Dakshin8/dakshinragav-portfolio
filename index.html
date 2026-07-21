@@ -541,23 +541,6 @@
       color: var(--text-primary);
     }
 
-    /* Responsive adjustments for experience section */
-    @media (max-width: 992px) {
-      .exp-row {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-        padding: 2rem;
-      }
-      .exp-meta-side {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px solid var(--card-border);
-        padding-bottom: 1rem;
-      }
-    }
-
-   
     /* --- Footer --- */
     footer {
       border-top: 1px solid var(--card-border);
@@ -633,7 +616,11 @@
       color: var(--text-muted);
     }
 
-    /* --- Responsive Queries --- */
+    /* ==========================================================================
+       Responsive Media Queries
+       ========================================================================== */
+
+    /* Tablet & Small Desktops */
     @media (max-width: 992px) {
       .hero {
         grid-template-columns: 1fr;
@@ -652,8 +639,15 @@
       }
       .exp-row {
         grid-template-columns: 1fr;
-        gap: 0.75rem;
-        padding: 1.5rem;
+        gap: 1.25rem;
+        padding: 2rem;
+      }
+      .exp-meta-side {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--card-border);
+        padding-bottom: 1rem;
       }
       .exp-location {
         text-align: left;
@@ -664,17 +658,95 @@
       }
     }
 
+    /* Mobile Devices */
     @media (max-width: 768px) {
-      .brands {
-        gap: 1.5rem;
-        padding-bottom: 3rem;
+      /* Brands Adjustments */
+      .brands { 
+        gap: 1.5rem; 
+        padding-bottom: 3rem; 
       }
-      .brand-list {
-        gap: 2rem;
-        font-size: 1rem;
+      .brand-list { 
+        gap: 2rem; 
+        font-size: 1rem; 
       }
-      .card-image-wrap {
-        height: 220px;
+      .card-image-wrap { 
+        height: 220px; 
+      }
+      
+      /* Header & Nav Adjustments for Mobile Stacking */
+      header {
+        flex-direction: column;
+        gap: 1.25rem;
+        padding: 1.5rem 0;
+      }
+      .nav-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.25rem;
+      }
+      .nav-link {
+        font-size: 0.9rem;
+      }
+      
+      /* Typography Scaling */
+      .hero-title {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+      }
+      
+      /* Cards & Grid Adjustments */
+      .card-content {
+        padding: 1.5rem;
+      }
+      
+      /* Experience Row Restructuring for small screens */
+      .exp-meta-side {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+      }
+      .exp-location {
+        margin-top: 0;
+      }
+
+      /* Footer Adjustments */
+      footer {
+        padding: 4rem 0 3rem 0;
+      }
+      .footer-title {
+        font-size: 1.5rem;
+      }
+      .footer-email {
+        font-size: 1.15rem;
+      }
+    }
+
+    /* Small Mobile Devices */
+    @media (max-width: 480px) {
+      body {
+        padding: 0 1.25rem;
+      }
+      .nav-actions {
+        gap: 0.85rem;
+      }
+      .btn-download {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+      }
+      .hero-photo-wrap {
+        height: 280px;
+      }
+      .exp-role {
+        font-size: 1.2rem;
+      }
+      .exp-row {
+        padding: 1.25rem;
+      }
+      .footer-links {
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+      .section-title {
+        font-size: 1.5rem;
       }
     }
   </style>
@@ -684,7 +756,7 @@
   <div id="top-loader"></div>
 
   <div class="container">
-<header>
+    <header>
       <!-- Replaced Text Logo with Image Logo -->
       <a href="#" class="logo">
         <img src="Logo-02.svg" alt="Dakshin Ragav Logo" class="logo-img">
