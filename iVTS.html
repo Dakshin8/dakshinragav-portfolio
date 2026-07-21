@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dakshin Ragav - User Experience Designer</title>
+  <title>Dakshin Ragav - User Experience Designer</title>
   <link rel="icon" type="image/png" href="fevicon.png">
   
   <style>
@@ -369,10 +369,26 @@
       color: var(--text-muted);
     }
 
-    /* --- Responsive --- */
+    /* --- Technical Responsive Framework Breakpoints --- */
+    @media (max-width: 992px) {
+      .cs-main-display {
+        height: 480px;
+      }
+    }
+
     @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1.25rem;
+        padding: 1.25rem 0;
+      }
+      .nav-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.25rem;
+      }
       .cs-hero {
-        padding-top: 4rem;
+        padding-top: 2rem;
         text-align: left;
       }
       .cs-meta-matrix {
@@ -386,8 +402,60 @@
         height: 320px;
         margin-bottom: 3.5rem;
       }
+      .cs-simple-writeup {
+        margin-bottom: 4rem;
+      }
       body {
         padding: 0 1.5rem;
+      }
+      footer {
+        padding: 4rem 0 3rem 0;
+      }
+      .footer-title {
+        font-size: 1.6rem;
+      }
+      .footer-links {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0 1.25rem;
+      }
+      .cs-title {
+        font-size: 2rem;
+      }
+      .nav-actions {
+        gap: 1rem;
+      }
+      .nav-link {
+        font-size: 0.9rem;
+      }
+      .btn-back {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+      }
+      .cs-meta-matrix {
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+      .cs-main-display {
+        height: 240px;
+      }
+      .cs-simple-writeup h2 {
+        font-size: 1.5rem;
+      }
+      .cs-simple-writeup {
+        font-size: 1.05rem;
+      }
+      .footer-links {
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+      .footer-email {
+        font-size: 1.15rem;
       }
     }
   </style>
@@ -441,32 +509,32 @@
       </section>
 
       <!-- Main Overview Hero Display Video -->
-<div class="cs-main-display reveal-el">
-  <iframe 
-    src="https://player.vimeo.com/video/1211271709?background=1&autoplay=1&loop=1&muted=1&autopause=0" 
-    style="width: 100%; height: 100%; border: none; object-fit: cover;" 
-    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
-    title="iVTS - Demo Video"
-    allowfullscreen>
-  </iframe>
-</div>
+      <div class="cs-main-display reveal-el">
+        <iframe 
+          src="https://player.vimeo.com/video/1211271709?background=1&autoplay=1&loop=1&muted=1&autopause=0" 
+          style="width: 100%; height: 100%; border: none; object-fit: cover;" 
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+          title="iVTS - Demo Video"
+          allowfullscreen>
+        </iframe>
+      </div>
 
       <!-- Simple Write-up Section -->
-<section class="cs-simple-writeup reveal-el">
-  <h2>About the Project</h2>
+      <section class="cs-simple-writeup reveal-el">
+        <h2>About the Project</h2>
 
-  <p>
-    The <strong>Indigenous Vessel Traffic System (IVTS)</strong> is a next-generation maritime traffic management platform developed at <strong>NTCPWC, IIT Madras</strong>. Built as an indigenous alternative to costly legacy systems, it unifies radar, AIS, weather, and surveillance data into a single interface, enabling safer and more efficient port operations.
-  </p>
+        <p>
+          The <strong>Indigenous Vessel Traffic System (IVTS)</strong> is a next-generation maritime traffic management platform developed at <strong>NTCPWC, IIT Madras</strong>. Built as an indigenous alternative to costly legacy systems, it unifies radar, AIS, weather, and surveillance data into a single interface, enabling safer and more efficient port operations.
+        </p>
 
-  <p>
-    As the <strong>Product Lead</strong>, I transformed complex operator workflows into an intuitive experience that reduced cognitive overload and helped VTS operators make faster, more informed decisions in high-pressure environments. By simplifying navigation, prioritizing critical alerts, and improving information hierarchy, the platform delivered an estimated <strong>60% improvement in operational efficiency</strong> across key workflows.
-  </p>
+        <p>
+          As the <strong>Product Lead</strong>, I transformed complex operator workflows into an intuitive experience that reduced cognitive overload and helped VTS operators make faster, more informed decisions in high-pressure environments. By simplifying navigation, prioritizing critical alerts, and improving information hierarchy, the platform delivered an estimated <strong>60% improvement in operational efficiency</strong> across key workflows.
+        </p>
 
-  <p>
-    Today, IVTS is deployed across multiple major Indian ports, helping reduce vessel turnaround times, strengthen coastal safety, and modernize India's maritime infrastructure. The platform has also received widespread recognition, with demonstrations showcased during high-profile government visits and gaining significant visibility as a benchmark for India's indigenous maritime innovation.
-  </p>
-</section>
+        <p>
+          Today, IVTS is deployed across multiple major Indian ports, helping reduce vessel turnaround times, strengthen coastal safety, and modernize India's maritime infrastructure. The platform has also received widespread recognition, with demonstrations showcased during high-profile government visits and gaining significant visibility as a benchmark for India's indigenous maritime innovation.
+        </p>
+      </section>
     </main>
 
     <!-- Footer Architecture -->
