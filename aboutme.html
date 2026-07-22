@@ -24,7 +24,7 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-padding-top: 7rem; }
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
     body {
       background-color: var(--bg-primary);
       color: var(--text-primary);
@@ -32,6 +32,7 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       padding: 0 2rem;
+      overflow-x: hidden;
     }
     .container { max-width: 1100px; margin: 0 auto; }
 
@@ -77,6 +78,7 @@
       padding: 0.6rem 1.2rem; border-radius: 50px; font-size: 0.9rem; font-weight: 600;
       text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;
       transition: var(--transition); box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      white-space: nowrap;
     }
     .btn-download:hover { background-color: var(--text-secondary); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(15, 23, 42, 0.15); }
     .btn-download svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.5; }
@@ -157,26 +159,25 @@
     .exp-role span { font-weight: 500; color: var(--text-secondary); }
     .exp-desc { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
 
-    /* --- Interest Works (4-Column Asymmetrical Grid) --- */
+    /* --- Interest Works --- */
     .interests-section { padding: 5rem 0 8rem 0; }
     
     .asym-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr); /* Changed to 4 in a row */
+      grid-template-columns: repeat(4, 1fr);
       gap: 1.5rem;
-      padding-bottom: 3.5rem; /* Accounts for the pushed-down cards */
+      padding-bottom: 3.5rem;
     }
 
     .asym-card {
       width: 100%;
-      height: 320px; /* Adjusted height for narrower columns */
+      height: 320px;
       border-radius: 20px;
       overflow: hidden;
       border: 1px solid var(--card-border);
       cursor: pointer;
     }
 
-    /* Pushes every even column down to create asymmetry */
     .asym-card:nth-child(even) {
       transform: translateY(3.5rem);
     }
@@ -233,7 +234,7 @@
     /* --- Footer --- */
     footer { border-top: 1px solid var(--card-border); padding: 6rem 0 4rem 0; text-align: center; }
     .footer-title { font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
-    .footer-email { font-size: 1.35rem; color: var(--text-primary); text-decoration: none; font-weight: 700; display: inline-block; padding-bottom: 4px; border-bottom: 2px solid transparent; transition: var(--transition); margin-bottom: 2.5rem; }
+    .footer-email { font-size: 1.35rem; color: var(--text-primary); text-decoration: none; font-weight: 700; display: inline-block; padding-bottom: 4px; border-bottom: 2px solid transparent; transition: var(--transition); margin-bottom: 2.5rem; word-break: break-word; }
     .footer-email:hover { border-color: var(--text-primary); color: var(--text-secondary); }
     .footer-links { display: flex; justify-content: center; align-items: center; gap: 2.5rem; margin-bottom: 2.5rem; }
     .text-link { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: var(--transition); position: relative; padding-bottom: 2px; }
@@ -246,44 +247,45 @@
     @media (max-width: 992px) {
       .exp-row { grid-template-columns: 1fr; gap: 1.25rem; padding: 2rem; }
       .exp-meta-side { flex-direction: row; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--card-border); padding-bottom: 1rem; }
-      
-      /* Drops to 2 columns on tablets */
       .asym-grid { grid-template-columns: repeat(2, 1fr); }
-      .asym-card { height: 350px; }
+      .asym-card { height: 320px; }
     }
     
     @media (max-width: 768px) {
       body { padding: 0 1.25rem; }
       
-      /* Stack header gracefully */
-      header { flex-direction: column; gap: 1.25rem; padding: 1.25rem 0; }
-      header.scrolled { padding: 1rem 0; }
-      .nav-actions { flex-wrap: wrap; justify-content: center; gap: 1.25rem; }
+      /* Compact Header for Mobile */
+      header { flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 0; }
+      header.scrolled { padding: 0.75rem 0; }
+      .logo-img { height: 42px; }
+      .nav-actions { gap: 1rem; flex-wrap: wrap; justify-content: flex-end; }
+      .nav-link { font-size: 0.88rem; }
+      .btn-download { padding: 0.5rem 1rem; font-size: 0.85rem; }
 
-      .about-hero { padding: 2rem 0 3rem 0; gap: 2.5rem; }
-      .about-photo-wrap { height: 350px; border-radius: 16px; }
-      .about-title { font-size: 1.8rem; }
+      .about-hero { padding: 2rem 0 3rem 0; gap: 2rem; }
+      .about-photo-wrap { height: 320px; border-radius: 16px; }
+      .about-title { font-size: 1.65rem; }
       
       .section-title { font-size: 1.5rem; }
       .exp-row { padding: 1.5rem; }
       
-      /* Drops to 1 column on mobile to save space */
+      /* Single Column Layout for Mobile Grid */
       .asym-grid { grid-template-columns: 1fr; gap: 1.25rem; padding-bottom: 0; }
-      .asym-card:nth-child(even) { transform: none; } /* Disables staggering on mobile */
-      .asym-card { height: 320px; }
+      .asym-card:nth-child(even) { transform: none; }
+      .asym-card { height: 280px; }
       
       footer { padding: 4rem 0 3rem 0; }
-      .footer-title { font-size: 1.6rem; }
-      .footer-email { font-size: 1.15rem; }
-      .footer-links { gap: 1.5rem; flex-wrap: wrap; }
+      .footer-title { font-size: 1.5rem; }
+      .footer-email { font-size: 1.1rem; }
+      .footer-links { gap: 1.25rem; }
     }
 
     @media (max-width: 480px) {
-      .about-photo-wrap { height: 260px; }
-      .nav-actions { gap: 1rem; }
-      .nav-link { font-size: 0.9rem; }
+      .about-photo-wrap { height: 250px; }
+      .nav-actions { gap: 0.75rem; }
+      .nav-link { font-size: 0.85rem; }
       .exp-meta-side { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
-      .footer-links { flex-direction: column; gap: 1.25rem; }
+      .footer-links { flex-direction: row; flex-wrap: wrap; gap: 1rem; justify-content: center; }
     }
   </style>
 </head>
@@ -298,7 +300,7 @@
       </a>
       
       <div class="nav-actions">
-         <a href="about.html" class="nav-link" style="color: var(--text-primary); font-weight: 700;">About me</a>
+        <a href="about.html" class="nav-link" style="color: var(--text-primary); font-weight: 700;">About me</a>
         <a href="index.html#work" class="nav-link">Work</a>
         <a href="index.html#experience" class="nav-link">Experience</a>
         
@@ -316,35 +318,32 @@
           <img src="aboutimage.png" alt="Dakshin Ragav" class="about-image" />
         </div>
 
-<div class="about-text">
-    <h1 class="about-title">
-        Hi, I'm Dakshin Ragav, a User Experience Designer based in Chennai.
-    </h1>
+        <div class="about-text">
+          <h1 class="about-title">
+            Hi, I'm Dakshin Ragav, a User Experience Designer based in Chennai.
+          </h1>
 
-    <p class="about-desc">
-        With nearly <strong>seven years of experience</strong> in UX design, I've had the opportunity to design digital products across different industries, creating experiences that solve real problems and deliver meaningful impact for users. My journey began in <strong>2019</strong> at my college senior's design agency, where working on live client projects gave me early exposure to the complete product design process and taught me the value of designing with purpose.
-    </p>
+          <p class="about-desc">
+            With nearly <strong>seven years of experience</strong> in UX design, I've had the opportunity to design digital products across different industries, creating experiences that solve real problems and deliver meaningful impact for users. My journey began in <strong>2019</strong> at my college senior's design agency, where working on live client projects gave me early exposure to the complete product design process and taught me the value of designing with purpose.
+          </p>
 
-    <p class="about-desc">
-        Over the years, I've been involved in every stage of the design journey, from understanding user needs and defining product strategy to creating wireframes, interaction designs, high-fidelity interfaces, prototypes, usability testing, and collaborating closely with developers to bring ideas to life. I enjoy taking ownership of the entire design process and believe the best products are built through curiosity, collaboration, and continuous iteration.
-    </p>
+          <p class="about-desc">
+            Over the years, I've been involved in every stage of the design journey, from understanding user needs and defining product strategy to creating wireframes, interaction designs, high-fidelity interfaces, prototypes, usability testing, and collaborating closely with developers to bring ideas to life. I enjoy taking ownership of the entire design process and believe the best products are built through curiosity, collaboration, and continuous iteration.
+          </p>
 
-    <p class="about-desc">
-        To strengthen my design foundation, I earned a Bachelor's degree in <strong>Visual Communication</strong> from <strong>Sathyabama Institute of Science and Technology</strong>. Driven by my curiosity to better understand how people interact with digital products, I also completed a <strong>UX Design Certification</strong> at <strong>UXMint, Chennai</strong>, where I further developed my skills in user-centered design, research methodologies, design thinking, and product strategy.
-    </p>
+          <p class="about-desc">
+            To strengthen my design foundation, I earned a Bachelor's degree in <strong>Visual Communication</strong> from <strong>Sathyabama Institute of Science and Technology</strong>. Driven by my curiosity to better understand how people interact with digital products, I also completed a <strong>UX Design Certification</strong> at <strong>UXMint, Chennai</strong>, where I further developed my skills in user-centered design, research methodologies, design thinking, and product strategy.
+          </p>
 
-    <p class="about-desc">
-        The most rewarding part of my work is seeing the products I've designed being used by thousands of people. Knowing that my work helps make someone's experience simpler, faster, or more enjoyable is what motivates me to keep learning and improving with every project.
-    </p>
+          <p class="about-desc">
+            The most rewarding part of my work is seeing the products I've designed being used by thousands of people. Knowing that my work helps make someone's experience simpler, faster, or more enjoyable is what motivates me to keep learning and improving with every project.
+          </p>
 
-    <p class="about-desc">
-        
-    </p>
-
-    <p class="about-desc">
-        Looking ahead, my goal is to become a <strong>Design Leader</strong>, building products that create meaningful impact while mentoring the next generation of designers and helping them grow into thoughtful problem solvers.
-    </p>
-</div>
+          <p class="about-desc">
+            Looking ahead, my goal is to become a <strong>Design Leader</strong>, building products that create meaningful impact while mentoring the next generation of designers and helping them grow into thoughtful problem solvers.
+          </p>
+        </div>
+      </section>
 
       <!-- Education Section -->
       <section class="education-section reveal-el">
@@ -381,53 +380,26 @@
         </div>
       </section>
 
-      <!-- Interest Works (8 Items, 4-in-a-row) -->
+      <!-- Interest Works (8 Items, 4-in-a-row on desktop, 1-in-a-row on mobile) -->
       <section class="interests-section reveal-el">
         <div class="section-header">
           <h2 class="section-title">Off the Canvas</h2>
           <p class="section-desc">
-              Outside of design, I'm a quiet and detail-oriented person who enjoys travelling, photography, filmmaking, Logo creation and writing stories. These creative interests have taught me to observe people closely, appreciate the finer details, and approach design with empathy and curiosity.
+            Outside of design, I'm a quiet and detail-oriented person who enjoys travelling, photography, filmmaking, Logo creation and writing stories. These creative interests have taught me to observe people closely, appreciate the finer details, and approach design with empathy and curiosity.
+          </p>
         </div>
 
         <!-- Asymmetrical Grid -->
         <div class="asym-grid">
-          
-          <!-- Row 1 -->
-          <div class="asym-card">
-            <img src="Ph1.jpg" alt="Photography Interest">
-          </div>
-          
-          <div class="asym-card">
-            <img src="ph2.jpg" alt="Gaming Setup">
-          </div>
-
-          <div class="asym-card">
-            <img src="ph3.jpg" alt="Reading">
-          </div>
-
-          <div class="asym-card">
-            <img src="ph4.jpg " alt="Workspace Setup">
-          </div>
-
-          <!-- Row 2 -->
-          <div class="asym-card">
-            <img src="ph5.jpg" alt="Architecture">
-          </div>
-          
-          <div class="asym-card">
-            <img src="ph6.jpg" alt="Coding">
-          </div>
-
-          <div class="asym-card">
-            <img src="ph7.jpg" alt="Abstract Art">
-          </div>
-
-          <div class="asym-card">
-            <img src="ph8.jpg" alt="Hardware">
-          </div>
-
-
-   
+          <div class="asym-card"><img src="Ph1.jpg" alt="Photography Interest"></div>
+          <div class="asym-card"><img src="ph2.jpg" alt="Gaming Setup"></div>
+          <div class="asym-card"><img src="ph3.jpg" alt="Reading"></div>
+          <div class="asym-card"><img src="ph4.jpg" alt="Workspace Setup"></div>
+          <div class="asym-card"><img src="ph5.jpg" alt="Architecture"></div>
+          <div class="asym-card"><img src="ph6.jpg" alt="Coding"></div>
+          <div class="asym-card"><img src="ph7.jpg" alt="Abstract Art"></div>
+          <div class="asym-card"><img src="ph8.jpg" alt="Hardware"></div>
+        </div>
       </section>
 
     </main>
@@ -436,14 +408,13 @@
       <h2 class="footer-title">Have an idea? I'd love to hear it.</h2>
       <a href="mailto:dakshinragav849@gmail.com" class="footer-email">dakshinragav849@gmail.com</a>
       
-      <!-- Cleaned up Text Links -->
       <div class="footer-links">
-        <a href="https://www.linkedin.com/in/dakshinragav/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bfir8WmvRTlG7xDy%2BXU6ANQ%3D%3D" target="_blank" class="text-link">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/dakshinragav/" target="_blank" class="text-link">LinkedIn</a>
         <a href="https://www.behance.net/dakshinragav" target="_blank" class="text-link">Behance</a>
         <a href="tel:+917667642718" class="text-link">Contact</a>
       </div>
 
-      <p class="footer-meta">© 2026.Dakshin Ragav</p>
+      <p class="footer-meta">© 2026. Dakshin Ragav</p>
     </footer>
   </div>
 
@@ -464,7 +435,7 @@
       }
     });
 
-    // Scroll Reveal Logic
+    // Mobile-Optimized Scroll Reveal Logic
     const revealElements = document.querySelectorAll('.reveal-el');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -474,11 +445,21 @@
         }
       });
     }, {
-      threshold: 0.12,
-      rootMargin: "0px 0px -50px 0px"
+      threshold: 0.02,
+      rootMargin: "0px 0px 100px 0px"
     });
 
     revealElements.forEach(el => revealObserver.observe(el));
+
+    // Fallback trigger to ensure content displays immediately on mobile load
+    window.addEventListener('load', () => {
+      revealElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+          el.classList.add('active');
+        }
+      });
+    });
 
     // Lightbox Interaction Logic
     const cards = document.querySelectorAll('.asym-card');
